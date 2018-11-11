@@ -16,7 +16,7 @@ class TaskProcessManufacture(Task):
     process primary manufacture bar.
     """
     def __init__(self):
-        pass
+        self.__item_index = 0  # index in item table
 
     def reset(self):
         pass
@@ -37,6 +37,13 @@ class TaskProcessManufacture(Task):
             return False
         scene = SceneManufacture()
         if scene.match(window):
+            bar = scene.manufacture_pull_left_bar()
+            if bar.get_state(window) == bar.HIDDEN:
+                bar.pull_left(window)
+                return True
+            if bar.all_busy(window):
+                scene.exit(window)
+                return True
             button = scene.left_button_favorite()
             if button.get_state(window) == button.OFF:
                 button.left_click(window)
@@ -45,6 +52,9 @@ class TaskProcessManufacture(Task):
             if button.get_state(window) == button.OFF:
                 button.left_click(window)
                 return True
+            scene.left_click_item(self.__item_index, window)
+            self.__item_index = self.__item_index + 1
+            return True
         scene = SceneManufactureOneItem()
         if scene.match(window):
             print("match! SceneManufactureOneItem")
@@ -70,4 +80,6 @@ if __name__ == "__main__":
     window_handle.set_foreground()
     time.sleep(1)
     task = TaskProcessManufacture()
-    task.do(window_handle)
+    for i in range(10):
+        task.do(window_handle)
+        time.sleep(1)

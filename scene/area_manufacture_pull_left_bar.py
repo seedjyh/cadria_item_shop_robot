@@ -62,6 +62,11 @@ class AreaManufacturePullLeftBar(Area):
         """
         return self.__slot[index]
 
+    def all_busy(self, window):
+        for slot in self.__slot:
+            if slot.get_state(window) != slot.BUSY:
+                return False
+        return True
 
 if __name__ == "__main__":
     pass

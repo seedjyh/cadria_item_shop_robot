@@ -8,16 +8,23 @@ from pywindow import Position
 from pywindow.colour import Colour
 from pywindow.window import get_window_handle
 from scene import Scene, MatchRule
+from scene.area_item_to_manufacture import AreaItemToManufacture
 from scene.area_manufacture_left_button import AreaManufactureLeftButton
 from scene.area_manufacture_top_button import AreaManufactureTopButton
 from scene.area_manufacture_pull_left_bar import AreaManufacturePullLeftBar
 
 
 class SceneManufacture(Scene):
+    """
+    This scene includes a table of all items to manufacture.
+    """
     def __init__(self):
         self.__manufacture_pull_left_bar = AreaManufacturePullLeftBar(Position(789, 650))
         self.__left_button_favorite = AreaManufactureLeftButton(Position(25, 434))
         self.__top_button_all = AreaManufactureTopButton(Position(222, 141))
+        self.__items = [
+            AreaItemToManufacture(Position(222 + index % 3 * 341, 223 + int(index / 3) * 206)) for index in range(9)
+        ]
 
     def match(self, window):
         rules = [
@@ -38,6 +45,13 @@ class SceneManufacture(Scene):
 
     def top_button_all(self):
         return self.__top_button_all
+
+    def left_click_item(self, index, window):
+        self.__items[index].left_click(window)
+
+    def exit(self, window):
+        window.move_to(Position(68, 667))
+        window.left_click()
 
 
 if __name__ == "__main__":
