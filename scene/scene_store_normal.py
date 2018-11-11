@@ -33,12 +33,12 @@ class SceneStoreNormal(Scene):
                 return False
         return True
 
-    def manufacture_slots(self):
+    def manufacture_slots(self, index):
         """
         get a copy of list of Area of manufacture slot list.
         :return: list of AreaManufactureSlot
         """
-        return list(self.__manufacture_slots)
+        return list(self.__manufacture_slots)[index]
 
     def touch_all_resource_grids(self, window):
         for grid in self.__resource_grids:
@@ -57,6 +57,7 @@ if __name__ == "__main__":
     else:
         print("NOT match!")
     scene.touch_all_resource_grids(window_handle)
-    for slot in SceneStoreNormal().manufacture_slots():
+    for i in range(6):
+        slot = SceneStoreNormal().manufacture_slots(i)
         if slot.get_state(window_handle) == slot.__class__.COMPLETED:
             slot.left_click(window_handle)

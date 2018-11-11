@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Author: seedjyh@gmail.com
+# Create date: 2018/11/11
+from abc import ABCMeta, abstractmethod
+
+
+class Task:
+    __metaclass__ = ABCMeta
+
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def reset(self):
+        pass
+
+    @abstractmethod
+    def do(self):
+        """
+
+        :return: True means requiring reset, False means nothing to do, just do() again.
+        """
+        pass
+
+
+if __name__ == "__main__":
+    pass

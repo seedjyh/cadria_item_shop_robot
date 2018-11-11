@@ -32,10 +32,6 @@ class AreaManufacturePullLeftSlot(Area):
     def center(self):
         return self.position(Position(34, 38))
 
-    def left_click(self, window):
-        window.move_to(self.center())
-        window.left_click()
-
 
 if __name__ == "__main__":
     pass

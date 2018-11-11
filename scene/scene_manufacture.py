@@ -8,12 +8,14 @@ from pywindow import Position
 from pywindow.colour import Colour
 from pywindow.window import get_window_handle
 from scene import Scene, MatchRule
+from scene.area_manufacture_category import AreaManufactureCategory
 from scene.area_manufacture_pull_left_bar import AreaManufacturePullLeftBar
 
 
 class SceneManufacture(Scene):
     def __init__(self):
         self.__manufacture_pull_left_bar = AreaManufacturePullLeftBar(Position(789, 650))
+        self.__favorite_button = AreaManufactureCategory(Position(25, 434))
 
     def match(self, window):
         rules = [
@@ -28,6 +30,9 @@ class SceneManufacture(Scene):
 
     def manufacture_pull_left_bar(self):
         return self.__manufacture_pull_left_bar
+
+    def favorite_button(self):
+        return self.__favorite_button
 
 
 if __name__ == "__main__":
