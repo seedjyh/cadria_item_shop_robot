@@ -58,6 +58,5 @@ if __name__ == "__main__":
         print("NOT match!")
     scene.touch_all_resource_grids(window_handle)
     for slot in SceneStoreNormal().manufacture_slots():
-        if slot.get_state(window_handle) == slot.__class__.IDLE:
+        if slot.get_state(window_handle) == slot.__class__.COMPLETED:
             slot.left_click(window_handle)
-            break
