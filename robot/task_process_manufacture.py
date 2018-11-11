@@ -34,12 +34,15 @@ class TaskProcessManufacture(Task):
                 else:
                     continue
             return False
-
         scene = SceneManufacture()
         if scene.match(window):
-            favorite_button = scene.favorite_button()
-            if favorite_button.get_state(window) == favorite_button.OFF:
-                favorite_button.left_click(window)
+            button = scene.left_button_favorite()
+            if button.get_state(window) == button.OFF:
+                button.left_click(window)
+                return True
+            button = scene.top_button_all()
+            if button.get_state(window) == button.OFF:
+                button.left_click(window)
                 return True
 
 

@@ -8,7 +8,7 @@ from scene import MatchRule
 from scene.area import Area
 
 
-class AreaManufactureCategory(Area):
+class AreaManufactureLeftButton(Area):
     OFF = 1
     ON = 2
 
