@@ -42,8 +42,7 @@ class SceneStoreNormal(Scene):
 
     def touch_all_resource_grids(self, window):
         for grid in self.__resource_grids:
-            print("parameter:", grid.left_top.add(Position(15, 15)))
-            window.move_to(grid.left_top.add(Position(15, 15)))
+            window.move_to(grid.center())
             time.sleep(0.1)
 
 
@@ -55,8 +54,10 @@ if __name__ == "__main__":
     scene = SceneStoreNormal()
     if scene.match(window_handle):
         print("match!")
-        for slot in SceneStoreNormal().manufacture_slots():
-            print("state of slot:", slot.get_state(window_handle))
     else:
         print("NOT match!")
     scene.touch_all_resource_grids(window_handle)
+    for slot in SceneStoreNormal().manufacture_slots():
+        if slot.get_state(window_handle) == slot.__class__.IDLE:
+            slot.left_click(window_handle)
+            break

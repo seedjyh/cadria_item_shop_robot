@@ -14,7 +14,7 @@ class Area:
         """
         :param left_top: the position of left-top point in screen (not in window, but the screen).
         """
-        self.left_top = left_top
+        self.__left_top = left_top
 
     def screen_point(self, point):
         """
@@ -22,7 +22,23 @@ class Area:
         :param point:
         :return:
         """
-        return Position(self.left_top.x + point.x, self.left_top.y + point.y)
+        return Position(self.__left_top.x + point.x, self.__left_top.y + point.y)
+
+    def position(self, offset):
+        """
+        get the position of pixel
+        :param offset: offset from left-top to the of center of this area.
+        :return: Position of actual position of this pixel.
+        """
+        return self.__left_top.add(offset)
+
+    @abstractmethod
+    def center(self):
+        """
+        get the position of center of this area
+        :return:
+        """
+        pass
 
     @abstractmethod
     def get_state(self):
