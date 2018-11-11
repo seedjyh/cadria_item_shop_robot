@@ -7,6 +7,7 @@ import time
 from pywindow.window import get_window_handle
 from robot.task import Task
 from scene.scene_manufacture import SceneManufacture
+from scene.scene_manufacture_one_item import SceneManufactureOneItem
 from scene.scene_store_normal import SceneStoreNormal
 
 
@@ -44,6 +45,23 @@ class TaskProcessManufacture(Task):
             if button.get_state(window) == button.OFF:
                 button.left_click(window)
                 return True
+        scene = SceneManufactureOneItem()
+        if scene.match(window):
+            print("match! SceneManufactureOneItem")
+            mode = scene.mode()
+            if mode.get_state(window) == mode.NORMAL:
+                mode.switch_to_advanced(window)
+                return True
+            button = scene.manufacture_button()
+            if button.get_state(window) == button.GREY:
+                scene.exit(window)
+                return True
+            if button.get_state(window) == button.DIAMOND:
+                scene.exit(window)
+                return True
+            button.left_click(window)
+            return True
+        # other scene....
 
 
 if __name__ == "__main__":
