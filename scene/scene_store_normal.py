@@ -9,6 +9,7 @@ from pywindow.colour import Colour
 from pywindow.window import get_window_handle
 from scene import Scene, MatchRule
 from scene.area_manufacture_slot import AreaManufactureSlot
+from scene.area_resource_grid import AreaResourceGrid
 
 
 class SceneStoreNormal(Scene):
@@ -21,6 +22,7 @@ class SceneStoreNormal(Scene):
             AreaManufactureSlot(Position(756, 615)),
             AreaManufactureSlot(Position(867, 615)),
         ]  # a list of Area of manufacture slots in the bottom of this scene.
+        self.__resource_grids = [AreaResourceGrid(Position(1230, 102 + 40 * i)) for i in range(12)]
 
     def match(self, window):
         rules = [
@@ -36,7 +38,13 @@ class SceneStoreNormal(Scene):
         get a copy of list of Area of manufacture slot list.
         :return: list of AreaManufactureSlot
         """
-        return [slot for slot in self.__manufacture_slots]
+        return list(self.__manufacture_slots)
+
+    def touch_all_resource_grids(self, window):
+        for grid in self.__resource_grids:
+            print("parameter:", grid.left_top.add(Position(15, 15)))
+            window.move_to(grid.left_top.add(Position(15, 15)))
+            time.sleep(0.1)
 
 
 if __name__ == "__main__":
@@ -51,3 +59,4 @@ if __name__ == "__main__":
             print("state of slot:", slot.get_state(window_handle))
     else:
         print("NOT match!")
+    scene.touch_all_resource_grids(window_handle)

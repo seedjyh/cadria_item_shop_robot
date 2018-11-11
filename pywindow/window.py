@@ -68,7 +68,7 @@ class WindowHandle:
         :return:
         """
         screen_pixel = self.left_top().add(position)
-        win32api.SetCursorPos(screen_pixel.x, screen_pixel.y)
+        win32api.SetCursorPos((screen_pixel.x, screen_pixel.y))
 
     @staticmethod
     def left_click():
