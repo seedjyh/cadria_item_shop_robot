@@ -1,0 +1,1 @@
+# cadria_item_shop_robot
