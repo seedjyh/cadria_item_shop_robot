@@ -31,9 +31,8 @@ class TaskProcessManufacture(Task):
                 elif slot.get_state(window) == slot.IDLE:
                     slot.left_click(window)
                     return True
-                else:
-                    continue
-            return False
+            else:
+                return False
         scene = SceneManufacture()
         if scene.match(window):
             bar = scene.manufacture_pull_left_bar()
