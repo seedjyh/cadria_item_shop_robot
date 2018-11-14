@@ -24,15 +24,7 @@ class TaskProcessManufacture(Task):
     def do(self, window):
         scene = SceneStoreNormal()
         if scene.match(window):
-            for slot in scene.manufacture_slots():
-                if slot.get_state(window) == slot.COMPLETED:
-                    slot.left_click(window)
-                    return True
-                elif slot.get_state(window) == slot.IDLE:
-                    slot.left_click(window)
-                    return True
-            else:
-                return False
+            return scene.left_click_not_busy_manufacture_slot(window)
         scene = SceneManufacture()
         if scene.match(window):
             bar = scene.manufacture_pull_left_bar()

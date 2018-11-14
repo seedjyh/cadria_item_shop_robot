@@ -33,17 +33,27 @@ class SceneStoreNormal(Scene):
                 return False
         return True
 
-    def manufacture_slots(self):
-        """
-        get a copy of list of Area of manufacture slot list.
-        :return: list of AreaManufactureSlot
-        """
-        return list(self.__manufacture_slots)
-
     def touch_all_resource_grids(self, window):
         for grid in self.__resource_grids:
             window.move_to(grid.center())
             time.sleep(0.1)
+
+    def left_click_not_busy_manufacture_slot(self, window):
+        """
+        click manufacture slot that is NOT busy (idle or completed) and return True
+        if all slots are busy, do nothing and return False.
+        :param window: window handle
+        :return: clicked some slot, return True
+        """
+        for now_slot in self.__manufacture_slots:
+            if now_slot.get_state(window) == now_slot.COMPLETED:
+                now_slot.left_click(window)
+                return True
+            elif now_slot.get_state(window) == now_slot.IDLE:
+                now_slot.left_click(window)
+                return True
+        else:
+            return False
 
 
 if __name__ == "__main__":
@@ -57,6 +67,4 @@ if __name__ == "__main__":
     else:
         print("NOT match!")
     scene.touch_all_resource_grids(window_handle)
-    for slot in SceneStoreNormal().manufacture_slots():
-        if slot.get_state(window_handle) == slot.__class__.COMPLETED:
-            slot.left_click(window_handle)
+    scene.left_click_not_busy_manufacture_slot(window_handle)
