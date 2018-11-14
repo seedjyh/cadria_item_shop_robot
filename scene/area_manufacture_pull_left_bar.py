@@ -3,28 +3,25 @@
 # Author: seedjyh@gmail.com
 # Create date: 2018/11/11
 from pywindow import Position
-from pywindow.colour import Colour
-from scene import MatchRule
 from scene.area import Area
-from scene.area_manufacture_pull_left_slot import AreaManufacturePullLeftSlot
+from scene.grid_manufacture_pull_left_slot import GridManufacturePullLeftSlot
 
 
 class AreaManufacturePullLeftBar(Area):
     HIDDEN = 1
     VISIBLE = 2
 
-    def __init__(self, left_top):
+    def __init__(self):
         """
         :param left_top: left-top position when this area is VISIBLE.
         """
-        super().__init__(left_top)
         self.__slot = [
-            AreaManufacturePullLeftSlot(super().position(Position(51, 6))),
-            AreaManufacturePullLeftSlot(super().position(Position(125, 6))),
-            AreaManufacturePullLeftSlot(super().position(Position(198, 6))),
-            AreaManufacturePullLeftSlot(super().position(Position(272, 6))),
-            AreaManufacturePullLeftSlot(super().position(Position(346, 6))),
-            AreaManufacturePullLeftSlot(super().position(Position(420, 6))),
+            GridManufacturePullLeftSlot(Position(840, 656)),
+            GridManufacturePullLeftSlot(Position(914, 656)),
+            GridManufacturePullLeftSlot(Position(987, 656)),
+            GridManufacturePullLeftSlot(Position(1061, 656)),
+            GridManufacturePullLeftSlot(Position(1135, 656)),
+            GridManufacturePullLeftSlot(Position(1209, 656)),
         ]
 
     def get_state(self, window):
@@ -33,8 +30,7 @@ class AreaManufacturePullLeftBar(Area):
         :param window:
         :return: HIDDEN or VISIBLE
         """
-        key_pixel = Position(18, 48)  # key pixel position IN area.
-        color = window.get_pixel_color(self.position(key_pixel))
+        color = window.get_pixel_color(Position(807, 698))
         if color.similar_to("184072", diff=5):
             return self.VISIBLE
         else:
@@ -52,7 +48,7 @@ class AreaManufacturePullLeftBar(Area):
             print("Warning: this area is already visible.")
             return
         else:
-            window.move_to(self.position(Position(475, 44)))
+            window.move_to(Position(1264, 694))
             window.left_click()
 
     def slot(self, index):

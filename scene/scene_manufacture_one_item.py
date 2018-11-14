@@ -11,8 +11,8 @@ from scene.area_manufacture_mode import AreaManufactureMode
 
 class SceneManufactureOneItem(Scene):
     def __init__(self):
-        self.__mode = AreaManufactureMode(Position(323, 598))
-        self.__manufacture_button = AreaManufactureButton(Position(813, 590))
+        self.__mode = AreaManufactureMode()
+        self.__manufacture_button = AreaManufactureButton()
 
     def match(self, window):
         rules = [

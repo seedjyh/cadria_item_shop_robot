@@ -5,10 +5,10 @@
 from pywindow import Position
 from pywindow.colour import Colour
 from scene import MatchRule
-from scene.area import Area
+from scene.grid import Grid
 
 
-class AreaManufacturePullLeftSlot(Area):
+class GridManufacturePullLeftSlot(Grid):
     IDLE = 1
     BUSY = 2  # working or completed
 

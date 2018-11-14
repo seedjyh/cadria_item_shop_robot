@@ -12,11 +12,8 @@ class AreaManufactureMode(Area):
     NORMAL = 1
     ADVANCED = 2
 
-    def __init__(self, left_top):
-        super().__init__(left_top)
-
-    def center(self):
-        return super().position(Position(0, 0))
+    def __init__(self):
+        pass
 
     def get_state(self, window):
         rule = MatchRule(Position(101, 22), Colour("63A6DE"))

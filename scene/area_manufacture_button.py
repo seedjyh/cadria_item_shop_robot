@@ -12,8 +12,8 @@ class AreaManufactureButton(Area):
     GREY = 2
     DIAMOND = 3
 
-    def __init__(self, left_top):
-        super().__init__(left_top)
+    def __init__(self):
+        pass
 
     def center(self):
         return super().position(Position(65, 27))

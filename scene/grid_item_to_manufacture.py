@@ -3,10 +3,10 @@
 # Author: seedjyh@gmail.com
 # Create date: 2018/11/12
 from pywindow import Position
-from scene.area import Area
+from scene.grid import Grid
 
 
-class AreaItemToManufacture(Area):
+class GridItemToManufacture(Grid):
     def __init__(self, left_top):
         super().__init__(left_top)
 

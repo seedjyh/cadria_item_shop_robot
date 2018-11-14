@@ -8,21 +8,21 @@ from pywindow import Position
 from pywindow.colour import Colour
 from pywindow.window import get_window_handle
 from scene import Scene, MatchRule
-from scene.area_manufacture_slot import AreaManufactureSlot
-from scene.area_resource_grid import AreaResourceGrid
+from scene.grid_manufacture_slot import GridManufactureSlot
+from scene.grid_resource import GridResource
 
 
 class SceneStoreNormal(Scene):
     def __init__(self):
         self.__manufacture_slots = [
-            AreaManufactureSlot(Position(315, 615)),
-            AreaManufactureSlot(Position(425, 615)),
-            AreaManufactureSlot(Position(535, 615)),
-            AreaManufactureSlot(Position(646, 615)),
-            AreaManufactureSlot(Position(756, 615)),
-            AreaManufactureSlot(Position(867, 615)),
+            GridManufactureSlot(Position(315, 615)),
+            GridManufactureSlot(Position(425, 615)),
+            GridManufactureSlot(Position(535, 615)),
+            GridManufactureSlot(Position(646, 615)),
+            GridManufactureSlot(Position(756, 615)),
+            GridManufactureSlot(Position(867, 615)),
         ]  # a list of Area of manufacture slots in the bottom of this scene.
-        self.__resource_grids = [AreaResourceGrid(Position(1230, 102 + 40 * i)) for i in range(12)]
+        self.__resource_grids = [GridResource(Position(1230, 102 + 40 * i)) for i in range(12)]
 
     def match(self, window):
         rules = [
@@ -33,12 +33,12 @@ class SceneStoreNormal(Scene):
                 return False
         return True
 
-    def manufacture_slots(self, index):
+    def manufacture_slots(self):
         """
         get a copy of list of Area of manufacture slot list.
         :return: list of AreaManufactureSlot
         """
-        return list(self.__manufacture_slots)[index]
+        return list(self.__manufacture_slots)
 
     def touch_all_resource_grids(self, window):
         for grid in self.__resource_grids:
@@ -57,7 +57,6 @@ if __name__ == "__main__":
     else:
         print("NOT match!")
     scene.touch_all_resource_grids(window_handle)
-    for i in range(6):
-        slot = SceneStoreNormal().manufacture_slots(i)
+    for slot in SceneStoreNormal().manufacture_slots():
         if slot.get_state(window_handle) == slot.__class__.COMPLETED:
             slot.left_click(window_handle)

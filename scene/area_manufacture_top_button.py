@@ -12,18 +12,18 @@ class AreaManufactureTopButton(Area):
     OFF = 1
     ON = 2
 
-    def __init__(self, left_top):
-        super().__init__(left_top)
+    def __init__(self):
+        pass
 
     def get_state(self, window):
-        rule = MatchRule(Position(12, 10), Colour("2C527C"))
-        if window.get_pixel_color(super().position(rule.position)).similar_to(rule.colour, 5):
+        rule = MatchRule(Position(234, 151), Colour("2C527C"))
+        if window.get_pixel_color(rule.position).similar_to(rule.colour, 5):
             return self.OFF
         else:
             return self.ON
 
     def center(self):
-        return super().position(Position(41, 25))
+        return Position(263, 166)
 
     def left_click(self, window):
         window.move_to(self.center())

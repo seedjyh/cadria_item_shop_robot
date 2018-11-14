@@ -24,8 +24,7 @@ class TaskProcessManufacture(Task):
     def do(self, window):
         scene = SceneStoreNormal()
         if scene.match(window):
-            for i in range(6):
-                slot = scene.manufacture_slots(i)
+            for slot in scene.manufacture_slots():
                 if slot.get_state(window) == slot.COMPLETED:
                     slot.left_click(window)
                     return True

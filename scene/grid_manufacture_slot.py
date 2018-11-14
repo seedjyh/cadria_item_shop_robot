@@ -3,10 +3,10 @@
 # Author: seedjyh@gmail.com
 # Create date: 2018/11/10
 from pywindow import Position
-from scene.area import Area
+from scene.grid import Grid
 
 
-class AreaManufactureSlot(Area):
+class GridManufactureSlot(Grid):
     IDLE = 1
     WORKING = 2
     COMPLETED = 3
@@ -33,5 +33,5 @@ class AreaManufactureSlot(Area):
 
 
 if __name__ == "__main__":
-    slot = AreaManufactureSlot(left_top=Position(3, 4))
+    slot = GridManufactureSlot(left_top=Position(3, 4))
     print(slot.left_top)
