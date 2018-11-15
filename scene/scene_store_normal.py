@@ -38,22 +38,8 @@ class SceneStoreNormal(Scene):
             window.move_to(grid.center())
             time.sleep(0.1)
 
-    def left_click_not_busy_manufacture_slot(self, window):
-        """
-        click manufacture slot that is NOT busy (idle or completed) and return True
-        if all slots are busy, do nothing and return False.
-        :param window: window handle
-        :return: clicked some slot, return True
-        """
-        for now_slot in self.__manufacture_slots:
-            if now_slot.get_state(window) == now_slot.COMPLETED:
-                now_slot.left_click(window)
-                return True
-            elif now_slot.get_state(window) == now_slot.IDLE:
-                now_slot.left_click(window)
-                return True
-        else:
-            return False
+    def manufacture_slots(self):
+        return self.__manufacture_slots
 
 
 if __name__ == "__main__":

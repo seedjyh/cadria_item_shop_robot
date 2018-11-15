@@ -18,9 +18,6 @@ class TaskProcessManufacture(Task):
     def __init__(self):
         self.__item_index = 0  # index in item table
 
-    def reset(self):
-        pass
-
     def do(self, window):
         scene = SceneStoreNormal()
         if scene.match(window):

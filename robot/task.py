@@ -12,14 +12,10 @@ class Task:
         pass
 
     @abstractmethod
-    def reset(self):
-        pass
-
-    @abstractmethod
     def do(self):
         """
 
-        :return: True means requiring reset, False means nothing to do, just do() again.
+        :return: True means task finished, next task shell be done, False requiring this task do() again.
         """
         pass
 
