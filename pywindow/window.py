@@ -70,6 +70,14 @@ class WindowHandle:
         screen_pixel = self.left_top().add(position)
         win32api.SetCursorPos((screen_pixel.x, screen_pixel.y))
 
+    def get_position(self):
+        """
+        get position of cursor
+        :return: object of class Position
+        """
+        x, y = win32api.GetCursorPos()
+        return Position(x, y).minus(self.left_top())
+
     @staticmethod
     def left_click():
         """

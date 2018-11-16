@@ -12,6 +12,9 @@ class Position:
     def add(self, position):
         return Position(self.x + position.x, self.y + position.y)
 
+    def minus(self, position):
+        return Position(self.x - position.x, self.y - position.y)
+
     def __str__(self):
         return "(x=%d,y=%d)" % (self.x, self.y)
 
