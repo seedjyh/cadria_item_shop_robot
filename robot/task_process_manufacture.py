@@ -9,6 +9,7 @@ from robot.task import Task
 from scene.scene_manufacture import SceneManufacture
 from scene.scene_manufacture_one_item import SceneManufactureOneItem
 from scene.scene_store_normal import SceneStoreNormal
+from scene.utils import go_to_scene
 
 
 class TaskProcessManufacture(Task):
@@ -19,46 +20,56 @@ class TaskProcessManufacture(Task):
         self.__item_index = 0  # index in item table
 
     def do(self, window):
-        scene = SceneStoreNormal()
-        if scene.match(window):
-            return scene.left_click_not_busy_manufacture_slot(window)
-        scene = SceneManufacture()
-        if scene.match(window):
-            bar = scene.manufacture_pull_left_bar()
-            if bar.get_state(window) == bar.HIDDEN:
-                bar.pull_left(window)
-                return True
-            if bar.all_busy(window):
-                scene.exit(window)
-                return True
-            button = scene.left_button_favorite()
-            if button.get_state(window) == button.OFF:
+        scene_store_normal = SceneStoreNormal()
+        scene_manufacture = SceneManufacture()
+        scene_manufacture_one_item = SceneManufactureOneItem()
+        go_to_scene(window, scene_store_normal)
+        # click idle manufacture slot
+        for slot in scene_store_normal.manufacture_slots():
+            if slot.get_state(window) == slot.IDLE:
+                slot.left_click(window)
+                break
+        else:
+            return True
+        # manufacture one item
+        print("start manufacture...")
+        while True:
+            time.sleep(1)
+            if scene_manufacture.match(window):
+                bar = scene_manufacture.manufacture_pull_left_bar()
+                if bar.get_state(window) == bar.HIDDEN:
+                    bar.pull_left(window)
+                    continue
+                if bar.all_busy(window):
+                    scene_manufacture.exit(window)
+                    return True
+                button = scene_manufacture.left_button_favorite()
+                if button.get_state(window) == button.OFF:
+                    button.left_click(window)
+                    continue
+                button = scene_manufacture.top_button_all()
+                if button.get_state(window) == button.OFF:
+                    button.left_click(window)
+                    continue
+                scene_manufacture.left_click_item(self.__item_index, window)
+                self.__item_index = self.__item_index + 1
+            elif scene_manufacture_one_item.match(window):
+                mode = scene_manufacture_one_item.mode()
+                if mode.get_state(window) == mode.NORMAL:
+                    mode.switch_to_advanced(window)
+                    continue
+                button = scene_manufacture_one_item.manufacture_button()
+                if button.get_state(window) == button.GREY:
+                    scene_manufacture_one_item.exit(window)
+                    continue
+                if button.get_state(window) == button.DIAMOND:
+                    scene_manufacture_one_item.exit(window)
+                    continue
                 button.left_click(window)
                 return True
-            button = scene.top_button_all()
-            if button.get_state(window) == button.OFF:
-                button.left_click(window)
-                return True
-            scene.left_click_item(self.__item_index, window)
-            self.__item_index = self.__item_index + 1
-            return True
-        scene = SceneManufactureOneItem()
-        if scene.match(window):
-            print("match! SceneManufactureOneItem")
-            mode = scene.mode()
-            if mode.get_state(window) == mode.NORMAL:
-                mode.switch_to_advanced(window)
-                return True
-            button = scene.manufacture_button()
-            if button.get_state(window) == button.GREY:
-                scene.exit(window)
-                return True
-            if button.get_state(window) == button.DIAMOND:
-                scene.exit(window)
-                return True
-            button.left_click(window)
-            return True
-        # other scene....
+            else:
+                print("unknown scene")
+                return False
 
 
 if __name__ == "__main__":
@@ -67,6 +78,4 @@ if __name__ == "__main__":
     window_handle.set_foreground()
     time.sleep(1)
     task = TaskProcessManufacture()
-    for i in range(10):
-        task.do(window_handle)
-        time.sleep(1)
+    task.do(window_handle)

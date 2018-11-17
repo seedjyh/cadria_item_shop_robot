@@ -16,14 +16,14 @@ class AreaManufactureMode(Area):
         pass
 
     def get_state(self, window):
-        rule = MatchRule(Position(101, 22), Colour("63A6DE"))
-        if window.get_pixel_color(super().position(rule.position)).similar_to(rule.colour, 5):
+        rule = MatchRule(Position(423, 620), Colour("63A6DE"))
+        if window.get_pixel_color(rule.position).similar_to(rule.colour, 5):
             return self.ADVANCED
         else:
             return self.NORMAL
 
     def switch_to_advanced(self, window):
-        window.move_to(super().position(Position(101, 22)))
+        window.move_to(Position(423, 620))
         window.left_click()
 
 

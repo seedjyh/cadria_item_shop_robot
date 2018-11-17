@@ -32,6 +32,12 @@ class WindowRect:
             else:
                 setattr(self, key, value)
 
+    def width(self):
+        return self.right - self.left
+
+    def height(self):
+        return self.bottom - self.top
+
 
 class WindowHandle:
     """
