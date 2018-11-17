@@ -25,6 +25,10 @@ class SceneExplorationFinished(Scene):
                 return False
         return True
 
+    def exit(self, window):
+        window.move_to(Position(1142, 119))
+        window.left_click()
+
 
 if __name__ == "__main__":
     window_text = "Cadria Item Shop"
@@ -34,5 +38,6 @@ if __name__ == "__main__":
     scene = SceneExplorationFinished()
     if scene.match(window_handle):
         print("match!")
+        scene.exit(window_handle)
     else:
         print("NOT match!")
