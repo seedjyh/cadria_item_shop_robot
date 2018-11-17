@@ -10,6 +10,7 @@ from pywindow.window import get_window_handle
 from scene import Scene, MatchRule
 from scene.grid_manufacture_slot import GridManufactureSlot
 from scene.grid_resource import GridResource
+from scene.scene_tavern import SceneTavern
 
 
 class SceneStoreNormal(Scene):
@@ -40,6 +41,26 @@ class SceneStoreNormal(Scene):
 
     def manufacture_slots(self):
         return self.__manufacture_slots
+
+    def go_to_tavern(self, window):
+        window.move_to(Position(1233, 667))
+        window.left_click()
+
+    def go_to_scene(self, window, target):
+        """
+        Go from this scene to target scene...
+        :param window:
+        :param target:  the target scene, must be unique (not in some kind of slot) and reachable at anytime.
+        :return: True means arrived.
+        """
+        if target.__class__ == SceneTavern:
+            self.go_to_tavern(window)
+            return True
+        else:
+            return False
+
+    def exit(self, window):
+        pass
 
 
 if __name__ == "__main__":

@@ -11,7 +11,8 @@ import win32con
 
 from pywindow import Position
 from pywindow.colour import Colour
-
+from pykeyboard import PyKeyboard
+# TODO: use from pymouse import PyMouse
 
 class WindowRect:
     def __init__(self, **kwargs):
@@ -86,6 +87,18 @@ class WindowHandle:
         """
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 200, 200, 0, 0)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 200, 200, 0, 0)
+
+    @staticmethod
+    def enter(word):
+        """
+        enter each character in word
+        :param word:
+        :return:
+        """
+        word = str.lower(word)
+        k = PyKeyboard()
+        for key in word:
+            k.tap_key(key)
 
 
 def get_window_handle(title):

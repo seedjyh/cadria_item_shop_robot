@@ -19,8 +19,8 @@ class TaskCleanCompletedPrimaryManufactureSlot(Task):
         pass
 
     def do(self, window):
-        scene_utils.go_to_scene_store_normal(window)
         scene = SceneStoreNormal()
+        scene_utils.go_to_scene(window, scene)
         for slot in scene.manufacture_slots():
             if slot.get_state(window) == slot.COMPLETED:
                 slot.left_click(window)

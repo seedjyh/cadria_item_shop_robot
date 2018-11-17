@@ -26,6 +26,8 @@ class SceneExplorationFinished(Scene):
         return True
 
     def exit(self, window):
+        window.enter("R")
+        time.sleep(1)
         window.move_to(Position(1142, 119))
         window.left_click()
 
@@ -38,6 +40,7 @@ if __name__ == "__main__":
     scene = SceneExplorationFinished()
     if scene.match(window_handle):
         print("match!")
+        scene.try_repair(window_handle)
         scene.exit(window_handle)
     else:
         print("NOT match!")
