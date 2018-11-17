@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2018/11/16
+import time
+
 from pywindow import Position
 from pywindow.colour import Colour
+from pywindow.window import get_window_handle
 from scene import Scene, MatchRule
 
 
@@ -27,4 +30,13 @@ class SceneItemLevelUp(Scene):
 
 
 if __name__ == "__main__":
-    pass
+    window_text = "Cadria Item Shop"
+    window_handle = get_window_handle(window_text)
+    window_handle.set_foreground()
+    time.sleep(1)
+    scene = SceneItemLevelUp()
+    if scene.match(window_handle):
+        print("match!")
+        scene.exit(window_handle)
+    else:
+        print("NOT match!")
