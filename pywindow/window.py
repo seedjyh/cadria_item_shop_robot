@@ -8,6 +8,7 @@ import win32gui
 import time
 
 import win32con
+from pymouse import PyMouse
 
 from pywindow import Position
 from pywindow.colour import Colour
@@ -99,12 +100,22 @@ class WindowHandle:
         """
         enter each character in word
         :param word:
-        :return:
+        :return: None
         """
         word = str.lower(word)
         k = PyKeyboard()
         for key in word:
             k.tap_key(key)
+
+    @staticmethod
+    def scroll(vertical=None):
+        """
+        Scroll the mouse
+        :param vertical: negative means scroll downward.
+        :return: None
+        """
+        m = PyMouse()
+        m.scroll(vertical=vertical)
 
 
 def get_window_handle(title):

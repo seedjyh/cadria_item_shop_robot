@@ -33,6 +33,10 @@ class SceneTavern(Scene):
     def exploration_slots(self):
         return self.__exploration_slots
 
+    def exit(self, window):
+        window.move_to(Position(1239, 688))
+        window.left_click()
+
 
 if __name__ == "__main__":
     window_text = "Cadria Item Shop"
