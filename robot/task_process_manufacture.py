@@ -24,6 +24,7 @@ class TaskProcessManufacture(Task):
         scene_manufacture = SceneManufacture()
         scene_manufacture_one_item = SceneManufactureOneItem()
         go_to_scene(window, scene_store_normal)
+        scene_store_normal.touch_all_resource_grids(window)
         # click idle manufacture slot
         for slot in scene_store_normal.manufacture_slots():
             if slot.get_state(window) == slot.IDLE:
