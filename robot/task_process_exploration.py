@@ -8,6 +8,7 @@ from pywindow import Position
 from pywindow.window import get_window_handle
 from robot.task import Task
 from scene import utils as scene_utils
+from scene.scene_exploration_hero_selection import SceneExplorationHeroSelection
 from scene.scene_exploration_location_list import SceneExplorationLocationList
 from scene.scene_tavern import SceneTavern
 
@@ -30,6 +31,7 @@ class TaskProcessExploration(Task):
         scene_utils.go_to_scene(window, SceneTavern())
         tavern_scene = SceneTavern()
         exploration_location_list_scene = SceneExplorationLocationList()
+        exploration_hero_selection_scene = SceneExplorationHeroSelection()
         while True:
             print("enter while")
             time.sleep(1)
@@ -46,10 +48,23 @@ class TaskProcessExploration(Task):
                     zone_list[0].left_click(window)
                     continue  # continue "while"
                 exploration_location_list_scene.select_location(window, self.__location_index)
+                self.__location_index = (self.__location_index + 1) % 9
+            elif exploration_hero_selection_scene.match(window):
+                idle_slot_list = []
+                for hero_slot in exploration_hero_selection_scene.hero_slot_list():
+                    if hero_slot.get_state(window) == hero_slot.IDLE:
+                        idle_slot_list.append(hero_slot)
+                if len(idle_slot_list) == 0:
+                    window.enter("G")
+                    return True
+                else:
+                    if exploration_hero_selection_scene.is_hero_banner_shown(window):
+                        exploration_hero_selection_scene.select_heroes(window, len(idle_slot_list))
+                    else:
+                        idle_slot_list[0].left_click(window)
             else:
                 print("Unknown scene")
                 return False
-
 
 
 if __name__ == "__main__":
@@ -58,4 +73,5 @@ if __name__ == "__main__":
     window_handle.set_foreground()
     time.sleep(1)
     task = TaskProcessExploration()
-    print("result:", task.do(window_handle))
+    for i in range(2):
+        print("result:", task.do(window_handle))

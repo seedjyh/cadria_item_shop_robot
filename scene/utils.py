@@ -7,6 +7,7 @@ import time
 from scene.scene_drawing_advanced import SceneDrawingAdvanced
 from scene.scene_equipment_repairment import SceneEquipmentRepairment
 from scene.scene_exploration_finished import SceneExplorationFinished
+from scene.scene_exploration_hero_selection import SceneExplorationHeroSelection
 from scene.scene_exploration_location_list import SceneExplorationLocationList
 from scene.scene_item_level_up import SceneItemLevelUp
 from scene.scene_manufacture import SceneManufacture
@@ -17,6 +18,7 @@ from scene.scene_transaction import SceneTransaction
 
 
 def go_to_scene(window, target=SceneStoreNormal()):
+    print("enter go_to_scene")
     scene_list = [
         SceneDrawingAdvanced(),
         SceneEquipmentRepairment(),
@@ -28,6 +30,7 @@ def go_to_scene(window, target=SceneStoreNormal()):
         SceneTavern(),
         SceneTransaction(),
         SceneExplorationLocationList(),
+        SceneExplorationHeroSelection(),
     ]
     # go back to SceneStoreNormal
     while True:

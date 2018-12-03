@@ -52,7 +52,7 @@ class TaskProcessManufacture(Task):
                     button.left_click(window)
                     continue
                 scene_manufacture.left_click_item(self.__item_index, window)
-                self.__item_index = self.__item_index + 1
+                self.__item_index = (self.__item_index + 1) % 8
             elif scene_manufacture_one_item.match(window):
                 mode = scene_manufacture_one_item.mode()
                 if mode.get_state(window) == mode.NORMAL:
