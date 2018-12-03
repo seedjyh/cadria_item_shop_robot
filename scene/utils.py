@@ -34,6 +34,7 @@ def go_to_scene(window, target=SceneStoreNormal()):
     ]
     # go back to SceneStoreNormal
     while True:
+        time.sleep(0.5)
         if SceneStoreNormal().match(window):
             break
         if target.match(window):
