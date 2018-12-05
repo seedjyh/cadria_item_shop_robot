@@ -5,7 +5,6 @@
 import time
 
 from pywindow.window import get_window_handle
-from robot.task_clean_completed_exploration_slot import TaskCleanCompletedExplorationSlot
 from robot.task_clean_completed_primary_manufacture_slot import TaskCleanCompletedPrimaryManufactureSlot
 from robot.task_process_exploration import TaskProcessExploration
 from robot.task_process_manufacture import TaskProcessManufacture
@@ -17,7 +16,6 @@ if __name__ == "__main__":
     time.sleep(1)
     tasks = [
         TaskProcessExploration(),
-        TaskCleanCompletedExplorationSlot(),
         TaskProcessManufacture(),
         TaskCleanCompletedPrimaryManufactureSlot(),
     ]

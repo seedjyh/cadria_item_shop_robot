@@ -45,6 +45,7 @@ class SceneExplorationLocationList(Scene):
         :param index:
         :return:
         """
+        print("selecting exploration location.")
         # scroll to most left
         window.move_to(Position(402, 365))
         for i in range(100):
