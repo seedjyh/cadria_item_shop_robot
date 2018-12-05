@@ -46,6 +46,7 @@ def go_to_scene(window, target=SceneStoreNormal()):
         if target.match(window):
             return True
         for test_scene in scene_list:
+            time.sleep(0.5)
             if test_scene.match(window):
                 test_scene.exit(window)
     # go from SceneStoreNormal to target
