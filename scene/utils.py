@@ -4,11 +4,14 @@
 # Create date: 2018/11/16
 import time
 
+from scene.scene_combat import SceneCombat
+from scene.scene_combat_hero_selection import SceneCombatHeroSelection
 from scene.scene_drawing_advanced import SceneDrawingAdvanced
 from scene.scene_equipment_repairment import SceneEquipmentRepairment
 from scene.scene_exploration_finished import SceneExplorationFinished
 from scene.scene_exploration_hero_selection import SceneExplorationHeroSelection
 from scene.scene_exploration_location_list import SceneExplorationLocationList
+from scene.scene_faction_war import SceneFactionWar
 from scene.scene_item_level_up import SceneItemLevelUp
 from scene.scene_manufacture import SceneManufacture
 from scene.scene_manufacture_one_item import SceneManufactureOneItem
@@ -31,6 +34,9 @@ def go_to_scene(window, target=SceneStoreNormal()):
         SceneTransaction(),
         SceneExplorationLocationList(),
         SceneExplorationHeroSelection(),
+        SceneFactionWar(),
+        SceneCombat(),
+        SceneCombatHeroSelection(),
     ]
     # go back to SceneStoreNormal
     while True:

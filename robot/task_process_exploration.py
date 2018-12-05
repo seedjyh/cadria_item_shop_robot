@@ -3,8 +3,6 @@
 # Author: seedjyh@gmail.com
 # Create date: 2018/12/2
 import time
-
-from pywindow import Position
 from pywindow.window import get_window_handle
 from robot.task import Task
 from scene import utils as scene_utils

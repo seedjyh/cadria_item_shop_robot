@@ -37,6 +37,10 @@ class SceneTavern(Scene):
         window.move_to(Position(1239, 688))
         window.left_click()
 
+    def left_click_general_dialog(self, window):
+        window.move_to(Position(545, 150))
+        window.left_click()
+
 
 if __name__ == "__main__":
     window_text = "Cadria Item Shop"

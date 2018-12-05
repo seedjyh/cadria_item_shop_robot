@@ -1,30 +1,32 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
-# Create date: 2018/12/2
+# Create date: 2018/12/4
 import time
 
 from pywindow import Position
 from pywindow.colour import Colour
 from pywindow.window import get_window_handle
 from scene import Scene, MatchRule
-from scene.grid_exploration_hero_slot import GridExplorationHeroSlot
+from scene.grid_combat_hero_slot import GridCombatHeroSlot
 
 
-class SceneExplorationHeroSelection(Scene):
+class SceneCombatHeroSelection(Scene):
+    """
+    a scene for selecting heroes free to go to combat.
+    """
     def __init__(self):
         self.__hero_slots = [
-            GridExplorationHeroSlot(Position(285, 471)),
-            GridExplorationHeroSlot(Position(453, 471)),
-            GridExplorationHeroSlot(Position(621, 471)),
-            GridExplorationHeroSlot(Position(789, 471)),
+            GridCombatHeroSlot(Position(333, 471)),
+            GridCombatHeroSlot(Position(477, 471)),
+            GridCombatHeroSlot(Position(621, 471)),
+            GridCombatHeroSlot(Position(765, 471)),
         ]
 
     def match(self, window):
         rules = [
-            MatchRule(Position(1167, 719), Colour("3DFFA4")),
-            MatchRule(Position(1168, 720), Colour("3DFEA3")),
-            MatchRule(Position(1169, 721), Colour("32D78A")),
+            MatchRule(Position(614, 360), Colour("66BEE2")),
+            MatchRule(Position(617, 360), Colour("2951D6")),
         ]
         for rule in rules:
             if not window.get_pixel_color(rule.position).similar_to(rule.colour, 8):
@@ -33,7 +35,7 @@ class SceneExplorationHeroSelection(Scene):
 
     def exit(self, window):
         if self.is_hero_banner_shown(window):
-            window.move_to(Position(398, 483))
+            window.move_to(Position(427, 476))
             window.left_click()
         else:
             window.move_to(Position(1207, 117))
@@ -42,12 +44,18 @@ class SceneExplorationHeroSelection(Scene):
     def hero_slot_list(self):
         return self.__hero_slots
 
+    def idle_hero_slots(self, window):
+        idle_slots = []
+        for slot in self.__hero_slots:
+            if slot.get_state(window) == slot.IDLE:
+                idle_slots.append(slot)
+        return idle_slots
+
     def is_hero_banner_shown(self, window):
-        return window.get_pixel_color(Position(392, 27)).similar_to("1D2632", diff=16)
+        return window.get_pixel_color(Position(392, 27)).similar_to("151B23", diff=16)
 
     def select_heroes(self, window, required=0):
         """
-
         :param window:
         :param required: number of heroes required to select.
         :return: True if found enough heroes.
@@ -78,12 +86,14 @@ if __name__ == "__main__":
     window_handle = get_window_handle(window_text)
     window_handle.set_foreground()
     time.sleep(1)
-    scene = SceneExplorationHeroSelection()
+    scene = SceneCombatHeroSelection()
     if scene.match(window_handle):
         print("match!")
         print("hero banner: ", scene.is_hero_banner_shown(window_handle))
-        for i in range(4):
-            print("index=%d, state=%d" % (i, scene.hero_slot_list()[i].get_state(window_handle)))
-        scene.exit(window_handle)
+        idle_slots = scene.idle_hero_slots(window_handle)
+        if len(idle_slots) == 0:
+            print("all slot has heroes.")
+        else:
+            scene.select_heroes(window_handle, len(idle_slots))
     else:
         print("NOT match!")
