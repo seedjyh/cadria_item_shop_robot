@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2018/12/4
+import logging
 import time
 
 from pywindow import Position
@@ -9,6 +10,8 @@ from pywindow.colour import Colour
 from pywindow.window import get_window_handle
 from scene import Scene, MatchRule
 from scene.grid_combat_hero_slot import GridCombatHeroSlot
+
+logger = logging.getLogger("SceneCombatHeroSelection")
 
 
 class SceneCombatHeroSelection(Scene):
@@ -60,7 +63,7 @@ class SceneCombatHeroSelection(Scene):
         :param required: number of heroes required to select.
         :return: True if found enough heroes.
         """
-        print("enter select_heroes, require", required)
+        logging.debug("enter select_heroes, require %d" % required)
         window.move_to(Position(135, 125))
         # scroll to most left
         window.scroll(vertical=-100)

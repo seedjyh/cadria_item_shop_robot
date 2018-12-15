@@ -2,12 +2,16 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2018/12/2
+import logging
 import time
 
 from pywindow import Position
 from pywindow.colour import Colour
 from scene import Scene, MatchRule
 from scene.grid_exploration_location_zone import GridExplorationLocationZone
+
+
+logger = logging.getLogger("SceneExplorationLocationList")
 
 
 class SceneExplorationLocationList(Scene):
@@ -45,7 +49,7 @@ class SceneExplorationLocationList(Scene):
         :param index:
         :return:
         """
-        print("selecting exploration location.")
+        logger.debug("selecting exploration location.")
         # scroll to most left
         window.move_to(Position(402, 365))
         for i in range(100):
