@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2018/12/4
+import logging
 import time
 
 from pywindow.window import get_window_handle
@@ -12,6 +13,7 @@ from scene.scene_faction_war import SceneFactionWar
 from scene.scene_tavern import SceneTavern
 from scene import utils as scene_utils
 
+logger = logging.getLogger("TaskProcessExploration")
 
 class TaskProcessFactionWar(Task):
 
@@ -55,7 +57,7 @@ class TaskProcessFactionWar(Task):
                     else:
                         idle_slots[0].left_click(window)
             else:
-                print("Unknown scene")
+                logger.debug("Unknown scene")
                 return False
 
 

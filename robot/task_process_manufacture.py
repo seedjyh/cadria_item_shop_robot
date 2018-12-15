@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2018/11/11
+import logging
 import time
 
 from pywindow.window import get_window_handle
@@ -11,6 +12,7 @@ from scene.scene_manufacture_one_item import SceneManufactureOneItem
 from scene.scene_store_normal import SceneStoreNormal
 from scene.utils import go_to_scene
 
+logger = logging.getLogger("TaskProcessExploration")
 
 class TaskProcessManufacture(Task):
     """
@@ -33,7 +35,7 @@ class TaskProcessManufacture(Task):
         else:
             return True
         # manufacture one item
-        print("start manufacture...")
+        logger.debug("start manufacture...")
         while True:
             time.sleep(1)
             if scene_manufacture.match(window):

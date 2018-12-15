@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2018/12/2
+import logging
 import time
 
 from pywindow import Position
@@ -9,6 +10,8 @@ from pywindow.colour import Colour
 from pywindow.window import get_window_handle
 from scene import Scene, MatchRule
 from scene.grid_exploration_hero_slot import GridExplorationHeroSlot
+
+logger = logging.getLogger("SceneExplorationHeroSelection")
 
 
 class SceneExplorationHeroSelection(Scene):
@@ -43,7 +46,10 @@ class SceneExplorationHeroSelection(Scene):
         return self.__hero_slots
 
     def is_hero_banner_shown(self, window):
-        return window.get_pixel_color(Position(392, 27)).similar_to("1D2632", diff=16)
+        result = window.get_pixel_color(Position(392, 27)).similar_to("1D2632", diff=16)
+        if result:
+            logging.debug("Hero banner is shown")
+        return result
 
     def select_heroes(self, window, required=0):
         """
@@ -52,7 +58,7 @@ class SceneExplorationHeroSelection(Scene):
         :param required: number of heroes required to select.
         :return: True if found enough heroes.
         """
-        print("enter select_heroes, require", required)
+        logging.debug("enter select_heroes, require", required)
         window.move_to(Position(135, 125))
         # scroll to most left
         window.scroll(vertical=-100)

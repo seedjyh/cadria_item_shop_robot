@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2018/12/2
+import logging
 import time
 from pywindow.window import get_window_handle
 from robot.task import Task
@@ -12,6 +13,7 @@ from scene.scene_exploration_hero_selection import SceneExplorationHeroSelection
 from scene.scene_exploration_location_list import SceneExplorationLocationList
 from scene.scene_tavern import SceneTavern
 
+logger = logging.getLogger("TaskProcessExploration")
 
 class TaskProcessExploration(Task):
     """
@@ -35,10 +37,9 @@ class TaskProcessExploration(Task):
         exploration_finished_scene = SceneExplorationFinished()
         repair_scene = SceneEquipmentRepairment()
         while True:
-            print("enter while====================")
+            logger.debug("enter while====================")
             time.sleep(1)
             if tavern_scene.match(window):
-                print("It's tavern scene here.")
                 for slot in tavern_scene.exploration_slots():
                     if slot.get_state(window) == slot.IDLE:
                         slot.left_click(window)
@@ -49,7 +50,6 @@ class TaskProcessExploration(Task):
                 else:
                     return True  # no idle exploration slot.
             elif exploration_location_list_scene.match(window):
-                print("It's exploration location list scene here.")
                 zone_list = exploration_location_list_scene.zone_list()
                 if zone_list[0].get_state(window) == zone_list[0].UNSELECTED:
                     zone_list[0].left_click(window)
@@ -57,31 +57,27 @@ class TaskProcessExploration(Task):
                 exploration_location_list_scene.select_location(window, self.__location_index)
                 self.__location_index = (self.__location_index + 1) % 9
             elif exploration_hero_selection_scene.match(window):
-                print("It's exploration hero selection scene here.")
                 idle_slot_list = []
                 for hero_slot in exploration_hero_selection_scene.hero_slot_list():
                     if hero_slot.get_state(window) == hero_slot.IDLE:
                         idle_slot_list.append(hero_slot)
-                print("length of idle hero slots list: %d" % len(idle_slot_list))
+                logger.debug("length of idle hero slots list: %d" % len(idle_slot_list))
                 if len(idle_slot_list) == 0:
-                    print("Go!")
+                    logger.debug("Go!")
                     window.enter("G")
                     return True
                 else:
                     if exploration_hero_selection_scene.is_hero_banner_shown(window):
-                        print("hero banner is shown.")
                         exploration_hero_selection_scene.select_heroes(window, len(idle_slot_list))
                     else:
-                        print("hero banner is NOT shown. Show it.")
+                        logger.debug("hero banner is NOT shown. Show it.")
                         idle_slot_list[0].left_click(window)
             elif exploration_finished_scene.match(window):
-                print("It's exploration finished scene here.")
                 exploration_finished_scene.exit(window)
             elif repair_scene.match(window):
-                print("It's repair scene here.")
                 repair_scene.exit(window)
             else:
-                print("Unknown scene")
+                logger.debug("Unknown scene")
                 return False
 
 
