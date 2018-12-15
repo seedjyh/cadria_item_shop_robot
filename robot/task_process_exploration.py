@@ -68,7 +68,8 @@ class TaskProcessExploration(Task):
                     return True
                 else:
                     if exploration_hero_selection_scene.is_hero_banner_shown(window):
-                        exploration_hero_selection_scene.select_heroes(window, len(idle_slot_list))
+                        if not exploration_hero_selection_scene.select_heroes(window, len(idle_slot_list)):
+                            return False
                     else:
                         logger.debug("hero banner is NOT shown. Show it.")
                         idle_slot_list[0].left_click(window)

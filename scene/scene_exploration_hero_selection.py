@@ -58,7 +58,7 @@ class SceneExplorationHeroSelection(Scene):
         :param required: number of heroes required to select.
         :return: True if found enough heroes.
         """
-        logging.debug("enter select_heroes, require", required)
+        logging.debug("enter select_heroes, require %d" % required)
         window.move_to(Position(135, 125))
         # scroll to most left
         window.scroll(vertical=-100)
@@ -67,7 +67,7 @@ class SceneExplorationHeroSelection(Scene):
         for i in range(50):
             window.scroll(vertical=1)  # range between hero avatar
             time.sleep(0.5)
-            avatar_test_positions = [Position(24 + 147 * avatar_index, 209) for avatar_index in range(8)]
+            avatar_test_positions = [Position(24 + 147 * avatar_index, 209) for avatar_index in range(9)]
             for test_position in avatar_test_positions:
                 if window.get_pixel_color(test_position).similar_to("E7F3F7", diff=16):
                     window.move_to(test_position)
@@ -77,6 +77,8 @@ class SceneExplorationHeroSelection(Scene):
                         return True
                     time.sleep(1)
                     break
+        logger.debug("No enough free heroes.")
+        return False
 
 
 if __name__ == "__main__":
