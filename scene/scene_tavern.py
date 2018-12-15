@@ -24,6 +24,7 @@ class SceneTavern(Scene):
     def match_rules(self, window):
         return [
             MatchRule(position=Position(153, 41), colour=Colour("4E69A7")),
+            MatchRule(position=Position(160, 52), colour=Colour("A6DEFE")),
         ]
 
     def exploration_slots(self):
