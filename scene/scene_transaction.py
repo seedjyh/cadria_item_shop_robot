@@ -25,6 +25,10 @@ class SceneTransaction(Scene):
                 return False
         return True
 
+    def exit(self, window):
+        window.move_to(Position(1192, 117))
+        window.left_click()
+
     def tradable(self, window):
         return self.__right_button.get_state(window) == self.__right_button.GREEN
 
