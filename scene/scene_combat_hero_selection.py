@@ -26,15 +26,11 @@ class SceneCombatHeroSelection(Scene):
             GridCombatHeroSlot(Position(765, 471)),
         ]
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+           return [
             MatchRule(Position(614, 360), Colour("66BEE2")),
             MatchRule(Position(617, 360), Colour("2951D6")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour, 8):
-                return False
-        return True
 
     def exit(self, window):
         if self.is_hero_banner_shown(window):

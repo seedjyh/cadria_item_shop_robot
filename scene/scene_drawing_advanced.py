@@ -14,15 +14,11 @@ class SceneDrawingAdvanced(Scene):
     def __init__(self):
         pass
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(position=Position(634, 107), colour=Colour("A3EBF6")),
             MatchRule(position=Position(634, 661), colour=Colour("20D293")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour):
-                return False
-        return True
 
     def exit(self, window):
         window.move_to(Position(638, 673))

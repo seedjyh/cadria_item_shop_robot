@@ -26,8 +26,8 @@ class SceneManufacture(Scene):
             GridItemToManufacture(Position(222 + index % 3 * 341, 223 + int(index / 3) * 206)) for index in range(9)
         ]
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(Position(95, 81), Colour("C7C1C0")),
             MatchRule(Position(97, 81), Colour("313031")),
             MatchRule(Position(99, 81), Colour("D6D1D3")),

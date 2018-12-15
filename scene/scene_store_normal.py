@@ -25,14 +25,10 @@ class SceneStoreNormal(Scene):
         ]  # a list of Area of manufacture slots in the bottom of this scene.
         self.__resource_grids = [GridResource(Position(1230, 102 + 40 * i)) for i in range(12)]
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(Position(153, 41), Colour("B9E5FE")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour):
-                return False
-        return True
 
     def touch_all_resource_grids(self, window):
         for grid in self.__resource_grids:

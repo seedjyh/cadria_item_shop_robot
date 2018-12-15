@@ -16,14 +16,10 @@ class SceneTransaction(Scene):
         self.__right_button = AreaTransactionRightButton()
         pass
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(Position(1064, 515), Colour("B2D6F7")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour, 8):
-                return False
-        return True
 
     def exit(self, window):
         window.move_to(Position(1192, 117))

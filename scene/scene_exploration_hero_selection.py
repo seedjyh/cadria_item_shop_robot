@@ -23,16 +23,12 @@ class SceneExplorationHeroSelection(Scene):
             GridExplorationHeroSlot(Position(789, 471)),
         ]
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(Position(1167, 719), Colour("3DFFA4")),
             MatchRule(Position(1168, 720), Colour("3DFEA3")),
             MatchRule(Position(1169, 721), Colour("32D78A")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour, 8):
-                return False
-        return True
 
     def exit(self, window):
         if self.is_hero_banner_shown(window):

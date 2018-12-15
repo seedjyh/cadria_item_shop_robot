@@ -14,15 +14,11 @@ class SceneItemLevelUp(Scene):
     def __init__(self):
         pass
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(Position(601, 638), Colour("5275F7")),
             MatchRule(Position(687, 638), Colour("1BCB8F")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour, 8):
-                return False
-        return True
 
     def exit(self, window):
         window.move_to(Position(601, 638))

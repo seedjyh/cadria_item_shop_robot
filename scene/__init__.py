@@ -15,6 +15,9 @@ class MatchRule:
         self.position = position
         self.colour = colour
 
+    def __str__(self):
+        return "Position:{}, Colour:{}".format(self.position, self.colour)
+
 
 class Scene:
     """
@@ -22,14 +25,27 @@ class Scene:
     """
     __metaclass__ = ABCMeta
 
-    @abstractmethod
     def match(self, window):
         """
         Identify if the type of current scene of game is this type
         :param window: pywindow.window.Window
-        :return:
+        :return: True means current scene matches the current class.
         """
-        # TODO: change it to `def match_rules()` returns a list of MatchRule objects.
+        rules = self.match_rules(window)
+        for rule in rules:
+            if not window.get_pixel_color(rule.position).similar_to(rule.colour, 8):
+                print("It's NOT scene:", type(self), "unmatch rule:", rule)
+                return False
+        print("It IS scene:", type(self), "rules:", rules)
+        return True
+
+    @abstractmethod
+    def match_rules(self, window):
+        """
+        return a list of MatchRule objects, defines if the *window* is current scene.
+        :param window:
+        :return: MatchRule[]
+        """
         pass
 
 

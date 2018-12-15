@@ -24,16 +24,12 @@ class SceneExplorationLocationList(Scene):
             GridExplorationLocationZone(Position(28, 237)),
         ]
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(position=Position(100, 61), colour=Colour("62D5F9")),
             MatchRule(position=Position(100, 63), colour=Colour("0F387C")),
             MatchRule(position=Position(100, 65), colour=Colour("56C8F8")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour):
-                return False
-        return True
 
     def exit(self, window):
         window.move_to(Position(67, 677))

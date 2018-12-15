@@ -11,16 +11,12 @@ class SceneEquipmentRepairment(Scene):
     def __init__(self):
         pass
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(position=Position(631, 34), colour=Colour("121A1C")),
             MatchRule(position=Position(579, 571), colour=Colour("4261EF")),
             MatchRule(position=Position(709, 571), colour=Colour("18BD7E")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour):
-                return False
-        return True
 
     def exit(self, window):
         window.move_to(Position(709, 571))

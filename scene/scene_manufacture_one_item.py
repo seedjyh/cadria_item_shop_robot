@@ -14,8 +14,8 @@ class SceneManufactureOneItem(Scene):
         self.__mode = AreaManufactureMode()
         self.__manufacture_button = AreaManufactureButton()
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(Position(564, 529), Colour("245179")),
             MatchRule(Position(566, 529), Colour("8BB9D8")),
             MatchRule(Position(568, 529), Colour("CBE6F2")),

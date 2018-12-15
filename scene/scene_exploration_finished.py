@@ -14,16 +14,12 @@ class SceneExplorationFinished(Scene):
     def __init__(self):
         pass
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(position=Position(454, 36), colour=Colour("D6E3CE")),
             MatchRule(position=Position(636, 36), colour=Colour("9FEAFF")),
             MatchRule(position=Position(824, 36), colour=Colour("D6E3CE")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour):
-                return False
-        return True
 
     def exit(self, window):
         window.enter("R")

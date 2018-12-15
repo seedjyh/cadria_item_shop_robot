@@ -21,14 +21,10 @@ class SceneTavern(Scene):
             GridExplorationSlot(Position(869, 615)),
         ]
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(position=Position(153, 41), colour=Colour("4E69A7")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour):
-                return False
-        return True
 
     def exploration_slots(self):
         return self.__exploration_slots

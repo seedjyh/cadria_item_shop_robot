@@ -19,6 +19,7 @@ class SceneCombat(Scene):
     STATE_FREE = 0
     STATE_COMBATING = 1
     STATE_RETURNED = 2
+
     def __init__(self):
         self.__levels = [
             GridCombatLevel(Position(253, 298)),
@@ -26,16 +27,12 @@ class SceneCombat(Scene):
             GridCombatLevel(Position(570, 298)),
         ]
 
-    def match(self, window):
-        rules = [
+    def match_rules(self, window):
+        return [
             MatchRule(Position(122, 70), Colour("0B218E")),
             MatchRule(Position(122, 72), Colour("2D2F4F")),
             MatchRule(Position(122, 74), Colour("D9D8DF")),
         ]
-        for rule in rules:
-            if not window.get_pixel_color(rule.position).similar_to(rule.colour, 8):
-                return False
-        return True
 
     def exit(self, window):
         window.move_to(Position(79, 638))
