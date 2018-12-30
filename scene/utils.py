@@ -13,8 +13,12 @@ from scene.scene_exploration_hero_selection import SceneExplorationHeroSelection
 from scene.scene_exploration_location_list import SceneExplorationLocationList
 from scene.scene_faction_war import SceneFactionWar
 from scene.scene_item_level_up import SceneItemLevelUp
+from scene.scene_login import SceneLogin
+from scene.scene_login_info_expired import SceneLoginInfoExpired
+from scene.scene_login_timeout import SceneLoginTimeout
 from scene.scene_manufacture import SceneManufacture
 from scene.scene_manufacture_one_item import SceneManufactureOneItem
+from scene.scene_network_disconnected import SceneNetworkDisconnected
 from scene.scene_store_normal import SceneStoreNormal
 from scene.scene_tavern import SceneTavern
 from scene.scene_transaction import SceneTransaction
@@ -37,6 +41,10 @@ def go_to_scene(window, target=SceneStoreNormal()):
         SceneFactionWar(),
         SceneCombat(),
         SceneCombatHeroSelection(),
+        SceneNetworkDisconnected(),
+        SceneLoginInfoExpired(),
+        SceneLogin(),
+        SceneLoginTimeout(),
     ]
     # go back to SceneStoreNormal
     while True:
