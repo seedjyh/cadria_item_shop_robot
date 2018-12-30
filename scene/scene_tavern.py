@@ -14,6 +14,7 @@ from scene.grid_exploration_slot import GridExplorationSlot
 class SceneTavern(Scene):
     def __init__(self):
         self.__exploration_slots = [
+            GridExplorationSlot(Position(312, 615)),
             GridExplorationSlot(Position(424, 615)),
             GridExplorationSlot(Position(535, 615)),
             GridExplorationSlot(Position(646, 615)),
