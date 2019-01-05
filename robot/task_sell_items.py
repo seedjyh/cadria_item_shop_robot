@@ -24,7 +24,8 @@ class TaskSellItems(Task):
         time.sleep(1)
         clicked_count = 0
         while clicked_count < self.__try_count:
-            window.left_click(self.rand_position(window))
+            window.move_to(self.rand_position(window))
+            window.left_click()
             clicked_count += 1
             time.sleep(1)
             if scene_store_normal.match(window):  # clicked the ground, but not customer
@@ -43,10 +44,10 @@ class TaskSellItems(Task):
         left = window_rect.left + window_rect.width() / 4
         right = window_rect.right - window_rect.width() / 4
         top = window_rect.top + window_rect.height() / 4
-        bottom = window_rect.top - window_rect.height() / 4
+        bottom = window_rect.bottom - window_rect.height() / 4
         return Position(
-            left + random.random() * (right - left),
-            top + random.random() * (bottom - top),
+            int(left + random.random() * (right - left)),
+            int(top + random.random() * (bottom - top)),
         )
 
 
