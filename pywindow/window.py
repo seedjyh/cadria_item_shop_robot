@@ -46,10 +46,10 @@ class WindowHandle:
     """
     def __init__(self, hwnd):
         self.hwnd = hwnd
-        self.rect = WindowRect(rect=win32gui.GetWindowRect(hwnd))
 
     def left_top(self):
-        return Position(self.rect.left, self.rect.top)
+        rect = WindowRect(rect=win32gui.GetWindowRect(self.hwnd))
+        return Position(rect.left, rect.top)
 
     def set_foreground(self):
         """
