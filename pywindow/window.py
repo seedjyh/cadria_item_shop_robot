@@ -67,6 +67,7 @@ class WindowHandle:
         hdc = ctypes.windll.user32.GetDC(None)
         screen_pixel = self.left_top().add(position)
         get_result = ctypes.windll.gdi32.GetPixel(hdc, screen_pixel.x, screen_pixel.y)
+        ctypes.windll.user32.ReleaseDC(0, hdc)
         return Colour(colour=get_result)
 
     def move_to(self, position):
