@@ -47,6 +47,10 @@ class WindowHandle:
     def __init__(self, hwnd):
         self.hwnd = hwnd
 
+    def get_rect(self):
+        rect = WindowRect(rect=win32gui.GetWindowRect(self.hwnd))
+        return rect
+
     def left_top(self):
         rect = WindowRect(rect=win32gui.GetWindowRect(self.hwnd))
         return Position(rect.left, rect.top)

@@ -40,7 +40,7 @@ class TaskSellItems(Task):
                 return False
 
     def rand_position(self, window):
-        window_rect = window.rect
+        window_rect = window.get_rect()
         left = window_rect.left + window_rect.width() / 4
         right = window_rect.right - window_rect.width() / 4
         top = window_rect.top + window_rect.height() / 4
