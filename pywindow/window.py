@@ -45,22 +45,30 @@ class WindowHandle:
     class to operate window in Windows OS.
     """
     def __init__(self, hwnd):
-        self.hwnd = hwnd
+        self.__hwnd = hwnd
+        self.__rect = None
+        self.reload_rect()
+
+    def reload_rect(self):
+        """
+        get the current rect of this window, including title area nad border.
+        :return:
+        """
+        self.__rect = WindowRect(rect=win32gui.GetWindowRect(self.__hwnd))
 
     def get_rect(self):
-        rect = WindowRect(rect=win32gui.GetWindowRect(self.hwnd))
-        return rect
+        return self.__rect
 
-    def left_top(self):
-        rect = WindowRect(rect=win32gui.GetWindowRect(self.hwnd))
-        return Position(rect.left, rect.top)
+    def __left_top(self):
+        return Position(self.__rect.left, self.__rect.top)
 
     def set_foreground(self):
         """
         Set the window to foreground.
         :return:
         """
-        win32gui.SetForegroundWindow(self.hwnd)
+        win32gui.SetForegroundWindow(self.__hwnd)
+        time.sleep(1)
 
     def get_pixel_color(self, position):
         """
@@ -69,7 +77,7 @@ class WindowHandle:
         :return: object for class Colour
         """
         hdc = ctypes.windll.user32.GetDC(None)
-        screen_pixel = self.left_top().add(position)
+        screen_pixel = self.__left_top().add(position)
         get_result = ctypes.windll.gdi32.GetPixel(hdc, screen_pixel.x, screen_pixel.y)
         ctypes.windll.user32.ReleaseDC(0, hdc)
         return Colour(colour=get_result)
@@ -80,37 +88,35 @@ class WindowHandle:
         :param position: relative position from left-top of the window.
         :return:
         """
-        screen_pixel = self.left_top().add(position)
+        screen_pixel = self.__left_top().add(position)
         win32api.SetCursorPos((screen_pixel.x, screen_pixel.y))
 
-    def get_position(self):
+    def left_click(self, position=None):
         """
-        get position of cursor
-        :return: object of class Position
-        """
-        x, y = win32api.GetCursorPos()
-        return Position(x, y).minus(self.left_top())
-
-    @staticmethod
-    def left_click():
-        """
-        click the left button of the mouse.
+        move to a position and click the left button of the mouse.
+        :param position: relative position from left-top of the window.
         :return:
         """
+        if position:
+            self.move_to(position)
+            # time.sleep(1)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 200, 200, 0, 0)
         win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 200, 200, 0, 0)
 
     @staticmethod
-    def enter(word):
+    def tap_letter(key):
         """
-        enter each character in word
+        tap a letter on keyboard once
         :param word:
         :return: None
         """
-        word = str.lower(word)
         k = PyKeyboard()
-        for key in word:
-            k.tap_key(key)
+        k.tap_key(key)
+
+    @staticmethod
+    def tap_escape():
+        k = PyKeyboard()
+        k.tap_key(k.escape_key)
 
     @staticmethod
     def scroll(vertical=None):
@@ -146,11 +152,11 @@ def get_window_handle(title):
 
 
 if __name__ == "__main__":
-    window_text = "微信开发者工具"
-    x = 397
-    y = 439
+    window_text = "Cadria Item Shop"
     handle = get_window_handle(window_text)
     handle.set_foreground()
-    time.sleep(1)
-    c = handle.get_pixel_color(Position(x, y))
-    print(hex(c.red), hex(c.green), hex(c.blue))
+    for i in range(100):
+        time.sleep(2)
+        handle.move_to(Position(0, 0))
+        time.sleep(2)
+        handle.left_click(Position(50, 50))

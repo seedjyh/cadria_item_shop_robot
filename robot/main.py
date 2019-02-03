@@ -6,10 +6,7 @@ import logging
 import time
 
 from pywindow.window import get_window_handle
-from robot.task_clean_completed_primary_manufacture_slot import TaskCleanCompletedPrimaryManufactureSlot
-from robot.task_process_exploration import TaskProcessExploration
-from robot.task_process_faction_war import TaskProcessFactionWar
-from robot.task_process_manufacture import TaskProcessManufacture
+
 
 def main():
     logging.basicConfig(
@@ -22,14 +19,12 @@ def main():
     window_handle.set_foreground()
     time.sleep(1)
     tasks = [
-        TaskProcessExploration(),
-        TaskProcessManufacture(),
-        TaskCleanCompletedPrimaryManufactureSlot(),
-        TaskProcessFactionWar(),
     ]
     while True:
+        time.sleep(1)
         for task in tasks:
             task.do(window_handle)
+
 
 if __name__ == "__main__":
     main()

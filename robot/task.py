@@ -12,9 +12,10 @@ class Task:
         pass
 
     @abstractmethod
-    def do(self):
+    def do(self, window):
         """
 
+        :param window: handle of game window.
         :return: True means task finished, next task shell be done, False requiring this task do() again.
         """
         pass

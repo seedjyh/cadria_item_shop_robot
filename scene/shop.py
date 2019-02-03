@@ -2,18 +2,16 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2019/2/3
-from . import shop, tavern, unknown
 from .scene import Scene
 
 
-def identify_scene(window):
-    for now_scene in Scene.__subclasses__():
-        obj = now_scene(window)
-        print("now obj:", obj)
-        if obj.match():
-            return obj
-    else:
-        return unknown.Unknown(window)
+class Shop(Scene):
+    def __init__(self, window):
+        Scene.__init__(self, window)
+        self._append_rule(153, 41, "B9E5FE")
+
+    def go_to_tavern(self):
+        self._window.tap_letter("i")
 
 
 if __name__ == "__main__":
@@ -21,4 +19,8 @@ if __name__ == "__main__":
     from robot import setting
     window_handle = get_window_handle(setting.WINDOW_TITLE)
     window_handle.set_foreground()
-    print(identify_scene(window_handle))
+    scene = Shop(window_handle)
+    if not scene.match():
+        print("not shop!")
+        exit()
+    scene.go_to_tavern()
