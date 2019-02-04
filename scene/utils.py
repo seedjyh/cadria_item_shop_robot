@@ -43,6 +43,12 @@ def assert_scene(scene_class, window):
     return scene
 
 
+def exit_if_match(scene, window):
+    now = scene(window)
+    if now.match():
+        now.exit()
+
+
 if __name__ == "__main__":
     from pywindow.window import get_window_handle
     from robot import setting

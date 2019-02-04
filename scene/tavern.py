@@ -16,6 +16,10 @@ class Tavern(Scene):
         self._window.left_click(Position(1123, 393))
         self._wait_after_action()
 
+    def go_to_faction_war(self):
+        self._window.left_click(Position(550, 157))
+        self._wait_after_action()
+
     def exit(self):
         self._window.tap_letter("b")  # hotkey: go to Scene Shop
         self._wait_after_action()
