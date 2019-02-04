@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2019/2/3
+import time
+
 from .scene import Scene
 
 
@@ -12,6 +14,7 @@ class Shop(Scene):
 
     def go_to_tavern(self):
         self._window.tap_letter("i")
+        self._wait_after_action()
 
 
 if __name__ == "__main__":

@@ -6,10 +6,11 @@
 """
 This package contains descriptions of all kinds of scene.
 """
-
+import time
 from abc import ABCMeta, abstractmethod
 
 from pywindow import Position
+from robot.setting import SLEEP_AFTER_ACTION
 
 
 class MatchRule:
@@ -64,6 +65,10 @@ class Scene:
                 return False
         print("It IS scene:", type(self))
         return True
+
+    @staticmethod
+    def _wait_after_action():
+        time.sleep(SLEEP_AFTER_ACTION)
 
     @abstractmethod
     def exit(self):

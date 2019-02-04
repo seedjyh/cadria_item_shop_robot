@@ -12,6 +12,7 @@ class Unknown(Scene):
 
     def exit(self):
         self._window.tap_escape()
+        self._wait_after_action()
 
 
 if __name__ == "__main__":

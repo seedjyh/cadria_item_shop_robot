@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2019/2/3
+import time
+
 from pywindow import Position
 from .scene import Scene, MatchRule
 
@@ -35,13 +37,16 @@ class Bank(Scene):
 
     def withdraw(self):
         self._window.left_click(Position(755, 577))
+        self._wait_after_action()
 
     def deposit(self):
         self._window.left_click(Position(755, 577))
+        self._wait_after_action()
 
     def exit(self):
         # press ESCape
         self._window.tap_escape()
+        self._wait_after_action()
 
 
 if __name__ == "__main__":

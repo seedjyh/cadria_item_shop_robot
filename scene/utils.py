@@ -16,6 +16,33 @@ def identify_scene(window):
         return unknown.Unknown(window)
 
 
+def go_to_shop(window):
+    for i in range(10):
+        scene = identify_scene(window)
+        if isinstance(scene, shop.Shop):
+            break
+        else:
+            scene.exit()
+    else:
+        raise Exception("failed to reach shop scene in limited steps")
+
+
+def assert_scene(scene_class, window):
+    """
+    create an object of Scene class, return the object is match.
+    raise exception if NOT.
+    :param scene_class: subclass of class Scene
+    :param window: window handle.
+    :return: object of the scene_class.
+    """
+    scene = scene_class(window)
+    if not scene.match():
+        errmsg = "UNEXPECTED SCENE! expected %s" % scene_class.__name__
+        print(errmsg)
+        raise Exception(errmsg)
+    return scene
+
+
 if __name__ == "__main__":
     from pywindow.window import get_window_handle
     from robot import setting
