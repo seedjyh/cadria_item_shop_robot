@@ -12,6 +12,10 @@ class Tavern(Scene):
         self._append_rule(41, 33, "3885FE")
         self._append_rule(65, 33, "3885FE")
 
+    def go_to_factions(self):
+        self._window.left_click(Position(300, 100))
+        self._wait_after_action()
+
     def go_to_bank(self):
         self._window.left_click(Position(1123, 393))
         self._wait_after_action()

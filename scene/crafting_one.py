@@ -21,7 +21,7 @@ class CraftingOne(Scene):
 
     def craft(self):
         self._window.left_click(Position(846, 603))
-        self._wait_after_action()
+        self._wait_after_action(times=3)
 
     def exit(self):
         self._window.tap_escape()

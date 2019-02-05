@@ -6,20 +6,17 @@ from pywindow import Position
 from .scene import Scene
 
 
-class SubmitConfirm(Scene):
+class FactionSubmit(Scene):
     def __init__(self, window):
         Scene.__init__(self, window)
-        self._append_rule(411, 285, "49ACF4")
-        self._append_rule(505, 534, "111BB0")
-        self._append_rule(737, 534, "037C3F")
+        self._append_rule(642, 375, "39558C")
+        self._append_rule(642, 376, "ADDFFF")
+        self._append_rule(560, 541, "141FB3")
+        self._append_rule(720, 541, "047E41")
 
     def submit(self):
-        self._window.left_click(Position(749, 574))
+        self._window.left_click(Position(750, 570))
         self._wait_after_action(times=3)  # wait disappear of banner
-
-    def submit_if_match(self):
-        if self.match():
-            self.submit()
 
     def exit(self):
         self._window.tap_escape()

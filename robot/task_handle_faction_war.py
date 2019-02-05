@@ -29,7 +29,7 @@ class TaskHandleFactionWar(Task):
         now = assert_scene(Preparation, window)
         while now.enough_items():
             now.submit_items()
-            exit_if_match(SubmitConfirm, window)
+            SubmitConfirm(window).submit_if_match()
         if now.is_slot_list_hide():
             now.show_slot_list()
         for i in range(6):

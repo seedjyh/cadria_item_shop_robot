@@ -67,8 +67,8 @@ class Scene:
         return True
 
     @staticmethod
-    def _wait_after_action():
-        time.sleep(SLEEP_AFTER_ACTION)
+    def _wait_after_action(times = 1):
+        time.sleep(SLEEP_AFTER_ACTION * times)
 
     @abstractmethod
     def exit(self):
