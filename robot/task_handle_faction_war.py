@@ -51,6 +51,5 @@ if __name__ == "__main__":
     from robot import setting
     window_handle = get_window_handle(setting.WINDOW_TITLE)
     window_handle.set_foreground()
-    assert_scene(Preparation, window_handle)
-    # task = TaskHandleFactionWar()
-    # task.do(window_handle)
+    task = TaskHandleFactionWar()
+    task.do(window_handle)
