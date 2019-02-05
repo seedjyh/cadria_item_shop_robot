@@ -4,6 +4,7 @@
 # Create date: 2019/2/3
 import time
 
+from pywindow import Position
 from .scene import Scene
 
 
@@ -11,10 +12,16 @@ class Shop(Scene):
     def __init__(self, window):
         Scene.__init__(self, window)
         self._append_rule(153, 41, "B9E5FE")
+        self.__resource_grids = [Position(1230, 102 + 40 * i) for i in range(12)]
 
     def go_to_tavern(self):
         self._window.tap_letter("i")
         self._wait_after_action()
+
+    def touch_resources(self):
+        for grid in self.__resource_grids:
+            self._window.move_to(grid.add(Position(20, 20)))
+            time.sleep(0.1)
 
 
 if __name__ == "__main__":
@@ -26,4 +33,4 @@ if __name__ == "__main__":
     if not scene.match():
         print("not shop!")
         exit()
-    scene.go_to_tavern()
+    scene.touch_resources()

@@ -6,6 +6,9 @@ import logging
 import time
 
 from pywindow.window import get_window_handle
+from robot.task_collect_resource import TaskCollectResource
+from robot.task_handle_bank import TaskHandleBank
+from robot.task_handle_faction_war import TaskHandleFactionWar
 
 
 def main():
@@ -19,6 +22,9 @@ def main():
     window_handle.set_foreground()
     time.sleep(1)
     tasks = [
+        TaskCollectResource(),
+        # TaskHandleBank(),
+        TaskHandleFactionWar(),
     ]
     while True:
         time.sleep(1)

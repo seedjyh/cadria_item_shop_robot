@@ -8,6 +8,7 @@ from scene.faction_war import FactionWar
 from scene.item_upgraded import ItemUpgraded
 from scene.preparation import Preparation
 from scene.shop import Shop
+from scene.submit_confirm import SubmitConfirm
 from scene.tavern import Tavern
 from scene.utils import go_to_shop, assert_scene, exit_if_match
 
@@ -28,6 +29,7 @@ class TaskHandleFactionWar(Task):
         now = assert_scene(Preparation, window)
         while now.enough_items():
             now.submit_items()
+            exit_if_match(SubmitConfirm, window)
         if now.is_slot_list_hide():
             now.show_slot_list()
         for i in range(6):
@@ -49,5 +51,6 @@ if __name__ == "__main__":
     from robot import setting
     window_handle = get_window_handle(setting.WINDOW_TITLE)
     window_handle.set_foreground()
-    task = TaskHandleFactionWar()
-    task.do(window_handle)
+    assert_scene(Preparation, window_handle)
+    # task = TaskHandleFactionWar()
+    # task.do(window_handle)
