@@ -9,10 +9,11 @@ from .scene import Scene
 def identify_scene(window):
     for now_scene in Scene.__subclasses__():
         obj = now_scene(window)
-        print("now obj:", obj)
         if obj.match():
+            print("match scene!", obj)
             return obj
     else:
+        print("unmatch any scene!")
         return unknown.Unknown(window)
 
 
@@ -46,7 +47,10 @@ def assert_scene(scene_class, window):
 def exit_if_match(scene, window):
     now = scene(window)
     if now.match():
+        print("It's ", scene, ", exiting...")
         now.exit()
+    else:
+        print("It's NOT ", scene, ", no need to exit")
 
 
 if __name__ == "__main__":

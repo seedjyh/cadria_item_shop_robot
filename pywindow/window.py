@@ -67,6 +67,7 @@ class WindowHandle:
         Set the window to foreground.
         :return:
         """
+        print("setting foreground")
         win32gui.SetForegroundWindow(self.__hwnd)
         time.sleep(1)
 

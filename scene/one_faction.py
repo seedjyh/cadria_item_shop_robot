@@ -90,6 +90,7 @@ class OneFaction(Scene):
             return False
 
     def left_click_slot(self, index):
+        print("scene:", self, ", left click slot, index=", index)
         self._window.left_click(self._slots[index].center())
         self._wait_after_action()
 

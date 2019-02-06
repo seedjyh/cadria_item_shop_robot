@@ -21,7 +21,7 @@ class Shop(Scene):
     def touch_resources(self):
         for grid in self.__resource_grids:
             self._window.move_to(grid.add(Position(20, 20)))
-            time.sleep(0.1)
+            self._wait_after_action()
 
 
 if __name__ == "__main__":

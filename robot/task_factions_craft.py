@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2019/2/5
+import logging
 import time
 
 from robot.task import Task
@@ -10,6 +11,7 @@ from scene.faction_submit import FactionSubmit
 from scene.factions import Factions
 from scene.item_upgraded import ItemUpgraded
 from scene.one_faction import OneFaction
+from scene.order_completed import OrderCompleted
 from scene.shop import Shop
 from scene.submit_confirm import SubmitConfirm
 from scene.tavern import Tavern
@@ -25,7 +27,6 @@ class TaskFactionsCraft(Task):
         assert_scene(Shop, window).go_to_tavern()
         assert_scene(Tavern, window).go_to_factions()
         for i in range(3):
-            print("handle faction:", i)
             assert_scene(Factions, window).go_to_faction(i)
             self.handle_faction(window)
 
@@ -44,6 +45,7 @@ class TaskFactionsCraft(Task):
                 faction.left_click_chunk(i)
                 assert_scene(FactionSubmit, window).submit()
                 SubmitConfirm(window).submit_if_match()
+                exit_if_match(OrderCompleted, window)
         # craft items if possible
         faction = assert_scene(OneFaction, window)
         for i in range(4):

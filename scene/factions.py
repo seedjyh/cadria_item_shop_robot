@@ -17,6 +17,7 @@ class Factions(Scene):
         self._append_rule(930, 152, "628DB3")
 
     def go_to_faction(self, index):
+        print("from Factions, going to faction, index=", index)
         if index < 0 or index >= 3:
             raise Exception("index exceed boundary [0, 2]")
         self._window.left_click(Position(354 + 288 * index, 160))

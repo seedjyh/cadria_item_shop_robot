@@ -61,9 +61,9 @@ class Scene:
         for rule in rules:
             actual_color = self._window.get_pixel_color(rule.position)
             if not actual_color.similar_to(rule.colour, 16):
-                print("It's NOT scene:", type(self), "unmatch rule:", rule, ", actual color:", actual_color)
+                # print("It's NOT scene:", type(self), "unmatch rule:", rule, ", actual color:", actual_color)
                 return False
-        print("It IS scene:", type(self))
+        # print("It IS scene:", type(self))
         return True
 
     @staticmethod
