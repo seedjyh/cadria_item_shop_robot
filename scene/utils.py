@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2019/2/3
-from . import shop, tavern, unknown
+from .import shop, unknown
 from .scene import Scene
 
 

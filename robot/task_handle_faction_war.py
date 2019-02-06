@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2019/2/4
+from pywindow import Position
 from robot.task import Task
+from scene.combat import Combat
+from scene.combat_choose_hero import CombatChooseHero
 from scene.crafting_one import CraftingOne
 from scene.faction_war import FactionWar
 from scene.item_upgraded import ItemUpgraded
@@ -11,6 +14,7 @@ from scene.shop import Shop
 from scene.submit_confirm import SubmitConfirm
 from scene.tavern import Tavern
 from scene.utils import go_to_shop, assert_scene, exit_if_match
+from scene import combat_returned, repair_item
 
 
 class TaskHandleFactionWar(Task):
@@ -24,6 +28,8 @@ class TaskHandleFactionWar(Task):
         assert_scene(FactionWar, window).go_to_contribute()
         if Preparation(window).match():
             self.do_preparation(window)
+        elif Combat(window).match():
+            self.do_combat(window)
 
     def do_preparation(self, window):
         now = assert_scene(Preparation, window)
@@ -44,6 +50,34 @@ class TaskHandleFactionWar(Task):
             if craft_scene.lack_of_resources():
                 return False
             craft_scene.craft()
+
+    def do_combat(self, window):
+        now = assert_scene(Combat, window)
+        if now.squad_is_back():
+            now.check_out_squad()
+        elif now.idle():
+            now.left_click_nightmare()
+            self.try_to_go(window)
+
+    def try_to_go(self, window):
+        now = assert_scene(CombatChooseHero, window)
+        required_count = now.required_heroes_count()
+        if now.banner_is_hidden():
+            if required_count == 0:
+                now.go_combat()
+                return True
+            now.show_banner()
+        # banner is shown
+        now.move_to_banner()
+        now.scroll_banner_most_left()
+        for i in range(50):
+            if required_count <= 0:
+                now.hide_banner()
+                now.go_combat()
+                return True
+            required_count -= now.select_free_heroes(required_count)
+            now.scroll_right_one_step()
+        return False
 
 
 if __name__ == "__main__":
