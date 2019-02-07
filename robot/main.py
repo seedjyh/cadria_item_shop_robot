@@ -6,6 +6,7 @@ import logging
 import time
 
 from pywindow.window import get_window_handle
+from robot.task_adventure import TaskAdventure
 from robot.task_collect_resource import TaskCollectResource
 from robot.task_factions_craft import TaskFactionsCraft
 from robot.task_handle_bank import TaskHandleBank
@@ -26,6 +27,7 @@ def main():
         TaskCollectResource(),
         # TaskHandleBank(),
         TaskFactionsCraft(),
+        TaskAdventure(),
         # TaskHandleFactionWar(),
     ]
     while True:

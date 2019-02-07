@@ -16,7 +16,7 @@ class Shop(Scene):
 
     def go_to_tavern(self):
         self._window.tap_letter("i")
-        self._wait_after_action()
+        self._wait_after_action(times=3)
 
     def touch_resources(self):
         for grid in self.__resource_grids:
