@@ -60,7 +60,7 @@ class Tavern(Scene):
         if index < 0 or index >= len(self._adventure_slots):
             raise Exception("Invalid index for adventure in tavern, index=%d" % index)
         self._window.left_click(self._adventure_slots[index].center())
-        self._wait_after_action()
+        self._wait_after_action(times=3)
 
     def exit(self):
         self._window.tap_letter("b")  # hotkey: go to Scene Shop

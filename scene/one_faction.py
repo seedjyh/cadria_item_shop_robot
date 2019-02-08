@@ -67,6 +67,16 @@ class OneFaction(Scene):
             Slot(Position(1209, 656)),
         ]
 
+    def new_order(self):
+        rules = [
+            MatchRule(Position(1123, 625), "1AE8B6")
+        ]
+        return self.match_with_rules(rules)
+
+    def accept_order(self):
+        self._window.left_click(Position(1123, 625))
+        self._wait_after_action()
+
     def is_slot_list_hide(self):
         rules = [
             MatchRule(Position(1265, 673), "AAE8FC")

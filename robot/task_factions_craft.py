@@ -10,6 +10,7 @@ from scene.crafting_one import CraftingOne
 from scene.faction_submit import FactionSubmit
 from scene.factions import Factions
 from scene.item_upgraded import ItemUpgraded
+from scene.no_blueprint import NoBlueprint
 from scene.one_faction import OneFaction
 from scene.order_completed import OrderCompleted
 from scene.shop import Shop
@@ -32,6 +33,8 @@ class TaskFactionsCraft(Task):
 
     def handle_faction(self, window):
         faction = assert_scene(OneFaction, window)
+        if faction.new_order():
+            faction.accept_order()
         # handle "done" slot
         if faction.is_slot_list_hide():
             faction.show_slot_list()
@@ -51,7 +54,10 @@ class TaskFactionsCraft(Task):
         for i in range(4):
             if faction.some_slot_is_idle() and faction.chunk_is_idle(i):
                 faction.left_click_chunk(i)
-                self.handle_craft(window)
+                if NoBlueprint(window).match():
+                    NoBlueprint(window).exit()
+                else:
+                    self.handle_craft(window)
         faction.exit()
 
     def handle_craft(self, window):

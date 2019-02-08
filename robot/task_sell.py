@@ -37,16 +37,18 @@ class TaskSell(Task):
     def do(self, window):
         go_to_shop(window)
         shop = assert_scene(Shop, window)
-        for point in self.get_color_changed_point(shop):
+        for point in self.get_color_changed_point(shop, window):
             window.left_click(point)
             time.sleep(1)
+            if Customer(window).match():
+                Customer(window).buy()
             if Customer(window).match():
                 Customer(window).surcharge()
                 Customer(window).sell()
             if Customer(window).match():
                 Customer(window).refuse()
 
-    def get_color_changed_point(self, shop):
+    def get_color_changed_point(self, shop, window):
         testers = [ColourChangeTester(p) for p in shop.customer_points()]
         for t in testers:
             t.set_oringin_color(window.get_pixel_color(t.point))

@@ -29,6 +29,10 @@ class Customer(Scene):
         self._window.tap_letter("q")
         self._wait_after_action()
 
+    def buy(self):
+        self._window.tap_letter("d")
+        self._wait_after_action()
+
     def exit(self):
         self._window.tap_escape()
         self._wait_after_action()

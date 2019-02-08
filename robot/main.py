@@ -8,9 +8,11 @@ import time
 from pywindow.window import get_window_handle
 from robot.task_adventure import TaskAdventure
 from robot.task_collect_resource import TaskCollectResource
+from robot.task_craft import TaskCraft
 from robot.task_factions_craft import TaskFactionsCraft
 from robot.task_handle_bank import TaskHandleBank
 from robot.task_handle_faction_war import TaskHandleFactionWar
+from robot.task_sell import TaskSell
 
 
 def main():
@@ -24,11 +26,13 @@ def main():
     window_handle.set_foreground()
     time.sleep(10)
     tasks = [
-        TaskCollectResource(),
+        # TaskCollectResource(),
         # TaskHandleBank(),
         TaskFactionsCraft(),
-        TaskAdventure(),
+        # TaskAdventure(),
         # TaskHandleFactionWar(),
+        # TaskCraft(),
+        # TaskSell(),
     ]
     while True:
         time.sleep(1)
