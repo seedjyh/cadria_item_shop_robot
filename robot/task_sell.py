@@ -9,6 +9,7 @@ from robot import setting
 from robot.task import Task
 from scene.customer import Customer
 from scene.shop import Shop
+from scene.shop_order import ShopOrder
 from scene.utils import go_to_shop, assert_scene
 
 CLICK_COUNT = 100
@@ -40,6 +41,15 @@ class TaskSell(Task):
         for point in self.get_color_changed_point(shop, window):
             window.left_click(point)
             time.sleep(1)
+            # shop order
+            shop_order = ShopOrder(window)
+            if shop_order.match():
+                if shop_order.match_with_rules(shop_order.rules_as_offer()):
+                    shop_order.accept()
+                else:
+                    shop_order.exit()
+                continue
+            # customer
             if Customer(window).match():
                 Customer(window).buy()
             if Customer(window).match():

@@ -26,13 +26,13 @@ def main():
     window_handle.set_foreground()
     time.sleep(10)
     tasks = [
-        # TaskCollectResource(),
-        # TaskHandleBank(),
+        TaskCollectResource(),
+        TaskHandleBank(),
         TaskFactionsCraft(),
-        # TaskAdventure(),
-        # TaskHandleFactionWar(),
-        # TaskCraft(),
-        # TaskSell(),
+        TaskAdventure(),
+        TaskHandleFactionWar(),
+        TaskCraft(),
+        TaskSell(),
     ]
     while True:
         time.sleep(1)

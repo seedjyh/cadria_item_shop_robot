@@ -39,6 +39,9 @@ class WindowRect:
     def height(self):
         return self.bottom - self.top
 
+    def __str__(self):
+        return "top=%d,bottom=%d,left=%d,right=%d" % (self.top, self.bottom, self.left, self.right)
+
 
 class WindowHandle:
     """
