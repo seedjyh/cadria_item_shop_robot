@@ -58,12 +58,11 @@ class Shop(Scene):
         generate 12 * 6 points around center of rect window.
         :return: generator of Point
         """
-        rect = self._window.get_rect()
-        top = rect.top + (rect.bottom - rect.top) / 4
-        bottom = rect.top + (rect.bottom - rect.top) * 3 / 4
+        top = 180
+        bottom = 600
         height = bottom - top
-        left = rect.left + (rect.right - rect.left) / 4
-        right = rect.left + (rect.right - rect.left) * 3 / 4
+        left = 330
+        right = 1030
         width = right - left
         for i in range(12):
             for j in range(6):
