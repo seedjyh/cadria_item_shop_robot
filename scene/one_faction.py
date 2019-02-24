@@ -85,7 +85,7 @@ class OneFaction(Scene):
 
     def show_slot_list(self):
         self._window.left_click(Position(1265, 673))
-        self._wait_after_action()
+        self._wait_after_action(times=3)
 
     def is_slot_done(self, index):
         rules = self._slots[index].rules_for_done()
@@ -102,7 +102,7 @@ class OneFaction(Scene):
     def left_click_slot(self, index):
         print("scene:", self, ", left click slot, index=", index)
         self._window.left_click(self._slots[index].center())
-        self._wait_after_action()
+        self._wait_after_action(times=3)
 
     def chunk_is_ready(self, index):
         if index < 0 or index >= len(self._chunks):
@@ -122,7 +122,7 @@ class OneFaction(Scene):
 
     def exit(self):
         self._window.left_click(Position(70, 660))
-        self._wait_after_action()
+        self._wait_after_action(times=3)
 
 
 if __name__ == "__main__":

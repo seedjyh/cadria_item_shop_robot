@@ -32,12 +32,17 @@ def main():
         TaskAdventure(),
         TaskHandleFactionWar(),
         TaskCraft(),
-        TaskSell(),
+        # TaskSell(),
     ]
     while True:
         time.sleep(1)
         for task in tasks:
-            task.do(window_handle)
+            try:
+                task.do(window_handle)
+            except Exception as e:
+                print("exception raised:", e)
+            finally:
+                print("now time-------------:", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
 
 if __name__ == "__main__":

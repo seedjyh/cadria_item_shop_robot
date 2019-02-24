@@ -38,7 +38,7 @@ class TaskAdventure(Task):
         now = assert_scene(AdventureLocations, window)
         now.go_to_regine_one()
         now.select_location(self._location_index)
-        self._location_index = (self._location_index + 1) % 9
+        self._location_index = (self._location_index + 1) % 8 # number of location for adventure
         self.try_to_go(window)
 
     def try_to_go(self, window):

@@ -6,6 +6,7 @@ import logging
 import time
 
 from robot.task import Task
+from scene.blueprint_upgraded import BlueprintUpgraded
 from scene.crafting_one import CraftingOne
 from scene.faction_submit import FactionSubmit
 from scene.factions import Factions
@@ -42,6 +43,8 @@ class TaskFactionsCraft(Task):
             if faction.is_slot_done(i):
                 faction.left_click_slot(i)
                 exit_if_match(ItemUpgraded, window)
+                exit_if_match(BlueprintUpgraded, window)
+        time.sleep(3)
         # submit items if possible
         for i in range(4):
             if faction.chunk_is_ready(i):
@@ -73,5 +76,6 @@ if __name__ == "__main__":
     from robot import setting
     window_handle = get_window_handle(setting.WINDOW_TITLE)
     window_handle.set_foreground()
-    task = TaskFactionsCraft()
-    task.do(window_handle)
+    #task = TaskFactionsCraft()
+    #task.do(window_handle)
+    assert_scene(OneFaction, window_handle)

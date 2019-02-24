@@ -49,6 +49,10 @@ class CombatChooseHero(Scene):
                 return True
         return False
 
+    def hide_banner(self):
+        self._window.left_click(Position(1000, 400))
+        self._wait_after_action()
+
     def move_to_banner(self):
         self._window.move_to(Position(135, 125))
 

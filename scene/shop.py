@@ -55,18 +55,24 @@ class Shop(Scene):
 
     def customer_points(self):
         """
-        generate 12 * 6 points around center of rect window.
-        :return: generator of Point
+        test all points whose Taxicab geometry less than 250 from center of window.
+        if a horizontal segment with width >= window_width / 45, and all of red, green, blue are larger than 0xB0,
+            which means B0B0B0, return it.
+        :return: a list of points
         """
-        top = 180
-        bottom = 600
-        height = bottom - top
-        left = 330
-        right = 1030
-        width = right - left
-        for i in range(12):
-            for j in range(6):
-                yield (Position(int(left + i * width / 12), int(top + j * height / 6)))
+        center = Position(650, 300)
+        height = 400
+        min_width = 40
+        height_step = 80
+        result = []
+        for i in range(int(height / height_step)):
+            y = int(center.y - height / 2 + i * height_step)
+            width = int(400 - abs(y - center.y) * 8 / 5) * 2
+            for j in range(int(width / min_width)):
+                x = int(center.x - width / 2 + j * min_width)
+                print("Testing", x, y)
+                result.append(Position(x, y))
+        return result
 
     def completed_craft_slot(self, index):
         if index < 0 or index >= 6:
@@ -78,6 +84,8 @@ class Shop(Scene):
     def idle_craft_slot(self, index):
         if index < 0 or index >= 6:
             raise Exception("invalid slot index", index)
+        print(self.__craft_slots[index].rule_for_idle()[0])
+        print(self.__craft_slots[index].rule_for_idle()[1])
         return self.match_with_rules(self.__craft_slots[index].rule_for_idle())
 
     def left_click_craft_slot(self, index):

@@ -38,6 +38,7 @@ class TaskCraft(Task):
                 print("slot %d is NOT idle" % i)
 
     def handle_crafting(self, window):
+        print("handle_crafting: %d", self._item_index)
         crafting = assert_scene(Crafting, window)
         crafting.choose_bookmark()
         crafting.choose_all_types()

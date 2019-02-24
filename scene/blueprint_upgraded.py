@@ -15,7 +15,7 @@ class BlueprintUpgraded(Scene):
 
     def exit(self):
         self._window.left_click(Position(636, 674))
-        self._wait_after_action()
+        self._wait_after_action(times=3)
 
 
 if __name__ == "__main__":
