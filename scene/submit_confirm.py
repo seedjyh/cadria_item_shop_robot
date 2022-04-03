@@ -14,7 +14,7 @@ class SubmitConfirm(Scene):
         self._append_rule(737, 534, "037C3F")
 
     def submit(self):
-        self._window.left_click(Position(749, 574))
+        self._actor.left_click(Position(749, 574))
         self._wait_after_action(times=3)  # wait disappear of banner
 
     def submit_if_match(self):

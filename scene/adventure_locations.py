@@ -14,7 +14,7 @@ class AdventureLocations(Scene):
         self._append_rule(131, 40, "EFAF79")
 
     def go_to_regine_one(self):
-        self._window.left_click(Position(84, 184))
+        self._actor.left_click(Position(84, 184))
         self._wait_after_action()
 
     def select_location(self, index):
@@ -28,11 +28,11 @@ class AdventureLocations(Scene):
             self._window.scroll(1)
             self._wait_after_action(0.3)
         if index <= 6:
-            self._window.left_click(Position(402, 365))
+            self._actor.left_click(Position(402, 365))
         elif index == 7:  # right boundary for scroll
-            self._window.left_click(Position(697, 365))
+            self._actor.left_click(Position(697, 365))
         elif index == 8:  # right boundary for scroll
-            self._window.left_click(Position(1036, 365))
+            self._actor.left_click(Position(1036, 365))
         else:
             print("invalid exploration location %d, should be 0~8" % index)
         self._wait_after_action(2)

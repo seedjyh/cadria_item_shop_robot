@@ -14,7 +14,7 @@ class BlueprintUpgraded(Scene):
         self._append_rule(590, 643, "40FBC4")
 
     def exit(self):
-        self._window.left_click(Position(636, 674))
+        self._actor.left_click(Position(636, 674))
         self._wait_after_action(times=3)
 
 

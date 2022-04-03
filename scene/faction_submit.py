@@ -15,7 +15,7 @@ class FactionSubmit(Scene):
         self._append_rule(720, 541, "047E41")
 
     def submit(self):
-        self._window.left_click(Position(750, 570))
+        self._actor.left_click(Position(750, 570))
         self._wait_after_action(times=3)  # wait disappear of banner
 
     def exit(self):

@@ -23,7 +23,7 @@ class CombatReturned(Scene):
         self._window.tap_letter("f")
         self._wait_after_action()
         exit_if_match(RepairItem, self._window)
-        self._window.left_click(Position(1146, 115))
+        self._actor.left_click(Position(1146, 115))
         self._wait_after_action()
 
 

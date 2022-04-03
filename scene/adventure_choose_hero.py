@@ -45,13 +45,13 @@ class AdventureChooseHero(Scene):
             return True
         for slot in self._slots:
             if self.match_with_rules(slot.rules_for_idle()):
-                self._window.left_click(slot.center())
+                self._actor.left_click(slot.center())
                 self._wait_after_action()
                 return True
         return False
 
     def hide_banner(self):
-        self._window.left_click(Position(1000, 400))
+        self._actor.left_click(Position(1000, 400))
         self._wait_after_action()
 
     def move_to_banner(self):
@@ -76,7 +76,7 @@ class AdventureChooseHero(Scene):
             if selected_count >= required_count:
                 break
             if self.match_with_rules([rule,]):
-                self._window.left_click(rule.position)
+                self._actor.left_click(rule.position)
                 self._wait_after_action()
                 selected_count += 1
         return selected_count

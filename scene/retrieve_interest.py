@@ -16,7 +16,7 @@ class RetrieveInterest(Scene):
         self._append_rule(640, 335, "60FFFF")
 
     def exit(self):
-        self._window.left_click(Position(630, 150))
+        self._actor.left_click(Position(630, 150))
         self._wait_after_action()
 
 

@@ -20,7 +20,7 @@ class CraftingOne(Scene):
         return self.match_with_rules(rules)
 
     def craft(self):
-        self._window.left_click(Position(846, 603))
+        self._actor.left_click(Position(846, 603))
         self._wait_after_action(times=3)
 
     def exit(self):

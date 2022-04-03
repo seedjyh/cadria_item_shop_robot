@@ -16,7 +16,7 @@ class Login(Scene):
         self._append_rule(690, 602, "017437")
 
     def exit(self):
-        self._window.left_click(Position(722, 631))
+        self._actor.left_click(Position(722, 631))
 
 
 if __name__ == "__main__":

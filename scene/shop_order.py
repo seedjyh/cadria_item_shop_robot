@@ -24,7 +24,7 @@ class ShopOrder(Scene):
         return rules
 
     def accept(self):
-        self._window.left_click(Position(1000, 600))
+        self._actor.left_click(Position(1000, 600))
         self._wait_after_action()
 
     def exit(self):

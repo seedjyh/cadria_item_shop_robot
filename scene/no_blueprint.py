@@ -14,7 +14,7 @@ class NoBlueprint(Scene):
         self._append_rule(628, 538, "96FEE4")
 
     def exit(self):
-        self._window.left_click(Position(628, 569))
+        self._actor.left_click(Position(628, 569))
         self._wait_after_action()
 
 

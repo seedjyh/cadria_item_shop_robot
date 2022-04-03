@@ -13,7 +13,7 @@ class FactionWar(Scene):
         self._append_rule(240, 348, "5D839F")
 
     def go_to_contribute(self):
-        self._window.left_click(Position(344, 603))
+        self._actor.left_click(Position(344, 603))
         self._wait_after_action()
 
     def exit(self):

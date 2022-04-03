@@ -2,18 +2,14 @@
 # -*- coding: utf-8 -*-
 # Author: seedjyh@gmail.com
 # Create date: 2018/11/8
-import ctypes
-import win32api
 import win32gui
 import time
 
-import win32con
-from pymouse import PyMouse
+from PIL import ImageGrab
 
 from pywindow import Position
-from pywindow.colour import Colour
-from pykeyboard import PyKeyboard
-# TODO: use from pymouse import PyMouse
+from pywindow.actor import Actor
+
 
 class WindowRect:
     def __init__(self, **kwargs):
@@ -49,21 +45,6 @@ class WindowHandle:
     """
     def __init__(self, hwnd):
         self.__hwnd = hwnd
-        self.__rect = None
-        self.reload_rect()
-
-    def reload_rect(self):
-        """
-        get the current rect of this window, including title area nad border.
-        :return:
-        """
-        self.__rect = WindowRect(rect=win32gui.GetWindowRect(self.__hwnd))
-
-    def get_rect(self):
-        return self.__rect
-
-    def __left_top(self):
-        return Position(self.__rect.left, self.__rect.top)
 
     def set_foreground(self):
         """
@@ -74,63 +55,18 @@ class WindowHandle:
         win32gui.SetForegroundWindow(self.__hwnd)
         time.sleep(1)
 
-    def get_pixel_color(self, position):
+    def get_window_image(self):
         """
-        get color of pixel specified by x, y, the position IN the window.
-        :param position: relative position from left-top of the window.
-        :return: object for class Colour
-        """
-        hdc = ctypes.windll.user32.GetDC(None)
-        screen_pixel = self.__left_top().add(position)
-        get_result = ctypes.windll.gdi32.GetPixel(hdc, screen_pixel.x, screen_pixel.y)
-        ctypes.windll.user32.ReleaseDC(0, hdc)
-        return Colour(colour=get_result)
-
-    def move_to(self, position):
-        """
-        move cursor to x, y, the position IN the window.
-        :param position: relative position from left-top of the window.
+        Get colour for each pixel in the window, including title bar
         :return:
         """
-        screen_pixel = self.__left_top().add(position)
-        win32api.SetCursorPos((screen_pixel.x, screen_pixel.y))
+        window_rect = self.get_rect()
+        image = ImageGrab.grab()
+        window_image = image.crop((window_rect.left, window_rect.top, window_rect.right, window_rect.bottom))
+        return window_image.load()
 
-    def left_click(self, position=None):
-        """
-        move to a position and click the left button of the mouse.
-        :param position: relative position from left-top of the window.
-        :return:
-        """
-        if position:
-            self.move_to(position)
-            # time.sleep(1)
-        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 200, 200, 0, 0)
-        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 200, 200, 0, 0)
-
-    @staticmethod
-    def tap_letter(key):
-        """
-        tap a letter on keyboard once
-        :param word:
-        :return: None
-        """
-        k = PyKeyboard()
-        k.tap_key(key)
-
-    @staticmethod
-    def tap_escape():
-        k = PyKeyboard()
-        k.tap_key(k.escape_key)
-
-    @staticmethod
-    def scroll(vertical=None):
-        """
-        Scroll the mouse
-        :param vertical: negative means scroll downward.
-        :return: None
-        """
-        m = PyMouse()
-        m.scroll(vertical=vertical)
+    def get_rect(self):
+        return WindowRect(rect=win32gui.GetWindowRect(self.__hwnd))
 
 
 def get_window_handle(title):
@@ -159,8 +95,10 @@ if __name__ == "__main__":
     window_text = "Cadria Item Shop"
     handle = get_window_handle(window_text)
     handle.set_foreground()
+    rect = handle.get_rect()
+    actor = Actor()
     for i in range(100):
         time.sleep(2)
-        handle.move_to(Position(0, 0))
+        actor.move_to(Position(rect.left, rect.top))
         time.sleep(2)
-        handle.left_click(Position(50, 50))
+        actor.left_click(Position(rect.left + 40, rect.top + 40))

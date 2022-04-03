@@ -14,7 +14,7 @@ class RepairItem(Scene):
         self._append_rule(748, 543, "017337")
 
     def exit(self):
-        self._window.left_click(Position(755, 576))
+        self._actor.left_click(Position(755, 576))
         self._wait_after_action()
 
 

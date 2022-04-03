@@ -19,7 +19,7 @@ class MessageBox(Scene):
         self._append_rule(630, 534, "037C3F")
 
     def exit(self):
-        self._window.left_click(Position(648, 568))
+        self._actor.left_click(Position(648, 568))
 
 
 if __name__ == "__main__":

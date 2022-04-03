@@ -20,7 +20,7 @@ class Factions(Scene):
         print("from Factions, going to faction, index=", index)
         if index < 0 or index >= 3:
             raise Exception("index exceed boundary [0, 2]")
-        self._window.left_click(Position(354 + 288 * index, 160))
+        self._actor.left_click(Position(354 + 288 * index, 160))
         self._wait_after_action()
 
     def exit(self):

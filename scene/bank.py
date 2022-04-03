@@ -36,11 +36,11 @@ class Bank(Scene):
         return self.match_with_rules(rules)
 
     def withdraw(self):
-        self._window.left_click(Position(755, 577))
+        self._actor.left_click(Position(755, 577))
         self._wait_after_action()
 
     def deposit(self):
-        self._window.left_click(Position(755, 577))
+        self._actor.left_click(Position(755, 577))
         self._wait_after_action()
 
     def exit(self):

@@ -49,7 +49,7 @@ class Preparation(Scene):
         return self.match_with_rules(rules)
 
     def show_slot_list(self):
-        self._window.left_click(Position(1265, 673))
+        self._actor.left_click(Position(1265, 673))
         self._wait_after_action()
 
     def enough_items(self):
@@ -59,7 +59,7 @@ class Preparation(Scene):
         return self.match_with_rules(rules)
 
     def submit_items(self):
-        self._window.left_click(Position(611, 264))
+        self._actor.left_click(Position(611, 264))
         self._wait_after_action()
 
     def is_slot_done(self, index):
@@ -75,11 +75,11 @@ class Preparation(Scene):
             return False
 
     def left_click_slot(self, index):
-        self._window.left_click(self._slots[index].center())
+        self._actor.left_click(self._slots[index].center())
         self._wait_after_action()
 
     def craft(self):
-        self._window.left_click(Position(611, 264))
+        self._actor.left_click(Position(611, 264))
         self._wait_after_action()
 
     def exit(self):

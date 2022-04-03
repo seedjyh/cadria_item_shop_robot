@@ -74,7 +74,7 @@ class OneFaction(Scene):
         return self.match_with_rules(rules)
 
     def accept_order(self):
-        self._window.left_click(Position(1123, 625))
+        self._actor.left_click(Position(1123, 625))
         self._wait_after_action()
 
     def is_slot_list_hide(self):
@@ -84,7 +84,7 @@ class OneFaction(Scene):
         return self.match_with_rules(rules)
 
     def show_slot_list(self):
-        self._window.left_click(Position(1265, 673))
+        self._actor.left_click(Position(1265, 673))
         self._wait_after_action(times=3)
 
     def is_slot_done(self, index):
@@ -101,7 +101,7 @@ class OneFaction(Scene):
 
     def left_click_slot(self, index):
         print("scene:", self, ", left click slot, index=", index)
-        self._window.left_click(self._slots[index].center())
+        self._actor.left_click(self._slots[index].center())
         self._wait_after_action(times=3)
 
     def chunk_is_ready(self, index):
@@ -117,11 +117,11 @@ class OneFaction(Scene):
     def left_click_chunk(self, index):
         if index < 0 or index >= len(self._chunks):
             raise Exception("index out of boundarys [0, 3]")
-        self._window.left_click(self._chunks[index].center())
+        self._actor.left_click(self._chunks[index].center())
         self._wait_after_action()
 
     def exit(self):
-        self._window.left_click(Position(70, 660))
+        self._actor.left_click(Position(70, 660))
         self._wait_after_action(times=3)
 
 

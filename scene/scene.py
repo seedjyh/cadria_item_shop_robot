@@ -10,6 +10,8 @@ import time
 from abc import ABCMeta, abstractmethod
 
 from pywindow import Position
+from pywindow.actor import Actor
+from pywindow.colour import Colour
 from robot.setting import SLEEP_AFTER_ACTION
 
 
@@ -28,9 +30,11 @@ class Scene:
     """
     __metaclass__ = ABCMeta
 
-    def __init__(self, window):
+    def __init__(self):
+        """
+        Initialize the object.
+        """
         self._scene_rules = []
-        self._window = window
 
     def _append_rule(self, x, y, colour):
         """
@@ -42,15 +46,15 @@ class Scene:
         """
         self._scene_rules.append(MatchRule(Position(x, y), colour))
 
-    def match(self):
+    def match(self, window_image):
         """
         Identify if the type of current scene of game is this type
-        :param window: pywindow.window.Window
+        :param window_image: An object of class from PIL.Image.Image::load() contains window part.
         :return: True means current scene matches the current class.
         """
-        return self.match_with_rules(self._scene_rules)
+        return self.match_with_rules(self._scene_rules, window_image)
 
-    def match_with_rules(self, rules):
+    def match_with_rules(self, rules, window_image):
         """
         match each rule in parameter rules
         :param rules: list of MatchRule objects.
@@ -59,7 +63,9 @@ class Scene:
         if len(rules) == 0:
             return False
         for rule in rules:
-            actual_color = self._window.get_pixel_color(rule.position)
+            pos = rule.position
+            actual_color_str = "".join(["%02X" % c for c in window_image[pos.x, pos.y]][::-1])
+            actual_color = Colour(actual_color_str)
             if not actual_color.similar_to(rule.colour, 16):
                 # print("It's NOT scene:", type(self), "unmatch rule:", rule, ", actual color:", actual_color)
                 return False

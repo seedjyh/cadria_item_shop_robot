@@ -17,7 +17,7 @@ class ItemUpgraded(Scene):
         self._append_rule(748, 678, "0CD079")
 
     def exit(self):
-        self._window.left_click(Position(540, 640))
+        self._actor.left_click(Position(540, 640))
         self._wait_after_action(times=3)
 
 

@@ -15,7 +15,7 @@ class OrderCompleted(Scene):
         self._append_rule(645, 617, "047F42")
 
     def exit(self):
-        self._window.left_click(Position(643, 652))
+        self._actor.left_click(Position(643, 652))
         self._wait_after_action()
 
 

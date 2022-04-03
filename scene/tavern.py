@@ -35,15 +35,15 @@ class Tavern(Scene):
         ]
 
     def go_to_factions(self):
-        self._window.left_click(Position(300, 100))
+        self._actor.left_click(Position(300, 100))
         self._wait_after_action()
 
     def go_to_bank(self):
-        self._window.left_click(Position(1123, 393))
+        self._actor.left_click(Position(1123, 393))
         self._wait_after_action()
 
     def go_to_faction_war(self):
-        self._window.left_click(Position(550, 157))
+        self._actor.left_click(Position(550, 157))
         self._wait_after_action()
 
     def adventure_slot_idle(self, index):
@@ -59,7 +59,7 @@ class Tavern(Scene):
     def left_click_adventure_slot(self, index):
         if index < 0 or index >= len(self._adventure_slots):
             raise Exception("Invalid index for adventure in tavern, index=%d" % index)
-        self._window.left_click(self._adventure_slots[index].center())
+        self._actor.left_click(self._adventure_slots[index].center())
         self._wait_after_action(times=3)
 
     def exit(self):

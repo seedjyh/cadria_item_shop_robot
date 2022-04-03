@@ -91,7 +91,7 @@ class Shop(Scene):
     def left_click_craft_slot(self, index):
         if index < 0 or index >= 6:
             raise Exception("invalid slot index", index)
-        self._window.left_click(self.__craft_slots[index].center())
+        self._actor.left_click(self.__craft_slots[index].center())
         self._wait_after_action(times=3)
 
 

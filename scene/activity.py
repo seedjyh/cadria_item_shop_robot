@@ -17,7 +17,8 @@ class Activity(Scene):
         self._append_rule(1143, 118, "0049FF")
 
     def exit(self):
-        self._window.left_click(Position(1143, 118))
+        self._actor.left_click(Position(1143, 118))
+        self._actor.left_click(Position(1143, 118))
 
 
 if __name__ == "__main__":

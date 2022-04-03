@@ -21,7 +21,7 @@ class Combat(Scene):
 
     def check_out_squad(self):
         print("checking out squad")
-        self._window.left_click(Position(474, 400))
+        self._actor.left_click(Position(474, 400))
         self._wait_after_action()
 
     def idle(self):
@@ -31,7 +31,7 @@ class Combat(Scene):
         return self.match_with_rules(rules)
 
     def left_click_nightmare(self):
-        self._window.left_click(Position(635, 389))
+        self._actor.left_click(Position(635, 389))
         self._wait_after_action()
 
     def exit(self):

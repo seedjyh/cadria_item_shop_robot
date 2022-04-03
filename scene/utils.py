@@ -6,15 +6,15 @@ from .import shop, unknown, tavern, login
 from .scene import Scene
 
 
-def identify_scene(window):
+def identify_scene(window_image):
     for now_scene in Scene.__subclasses__():
-        obj = now_scene(window)
-        if obj.match():
+        obj = now_scene()
+        if obj.match(window_image):
             print("match scene!", obj)
             return obj
     else:
         print("unmatch any scene!")
-        return unknown.Unknown(window)
+        return unknown.Unknown()
 
 
 def go_to_shop(window):

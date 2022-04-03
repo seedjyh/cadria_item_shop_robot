@@ -31,11 +31,11 @@ class Crafting(Scene):
                 self._items.append(Item(Position(222 + column * 341, 223 + row * 206)))
 
     def choose_bookmark(self):
-        self._window.left_click(Position(97, 479))
+        self._actor.left_click(Position(97, 479))
         self._wait_after_action()
 
     def choose_all_types(self):
-        self._window.left_click(Position(267, 163))
+        self._actor.left_click(Position(267, 163))
         self._wait_after_action()
 
     def valid_item(self, row, column):
@@ -46,7 +46,7 @@ class Crafting(Scene):
     def choose_item(self, row, column):
         if row < 0 or row >= 3 or column < 0 or column >=3:
             raise Exception("invalid row and column:", row, column)
-        self._window.left_click(self._items[row * 3 + column].click_point())
+        self._actor.left_click(self._items[row * 3 + column].click_point())
         self._wait_after_action()
 
     def exit(self):
